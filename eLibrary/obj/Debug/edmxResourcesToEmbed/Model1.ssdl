@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eLibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bookcategory">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookDetails">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AuthorName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RackNo" Type="int" Nullable="false" />
+    <Property Name="_Language" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="Rating" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subscription">
+    <Key>
+      <PropertyRef Name="SubscriptionId" />
+    </Key>
+    <Property Name="SubscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="UserBookDetails">
+    <Key>
+      <PropertyRef Name="DetailId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="BookId" Type="int" Nullable="false" />
+    <Property Name="IssueDate" Type="date" Nullable="false" />
+    <Property Name="SubmissionDate" Type="date" Nullable="false" />
+    <Property Name="SubmittedOn" Type="date" />
+    <Property Name="Fine" Type="int" />
+    <Property Name="Is_Submitted" Type="bit" />
+    <Property Name="Is_Paid" Type="bit" />
+    <Property Name="DetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="_Password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="_Address" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Occupation" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__BookDetai__Categ__2B3F6F97">
+    <End Role="Bookcategory" Type="Self.Bookcategory" Multiplicity="0..1" />
+    <End Role="BookDetails" Type="Self.BookDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bookcategory">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="BookDetails">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Subscript__UserI__30F848ED">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Subscription" Type="Self.Subscription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Subscription">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserBookD__BookI__2E1BDC42">
+    <End Role="BookDetails" Type="Self.BookDetails" Multiplicity="1" />
+    <End Role="UserBookDetails" Type="Self.UserBookDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookDetails">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="UserBookDetails">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserBookD__UserI__2D27B809">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserBookDetails" Type="Self.UserBookDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserBookDetails">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__RoleID__267ABA7A">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="eLibraryModelStoreContainer">
+    <EntitySet Name="Bookcategory" EntityType="Self.Bookcategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookDetails" EntityType="Self.BookDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserBookDetails" EntityType="Self.UserBookDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BookDetai__Categ__2B3F6F97" Association="Self.FK__BookDetai__Categ__2B3F6F97">
+      <End Role="Bookcategory" EntitySet="Bookcategory" />
+      <End Role="BookDetails" EntitySet="BookDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Subscript__UserI__30F848ED" Association="Self.FK__Subscript__UserI__30F848ED">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Subscription" EntitySet="Subscription" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserBookD__BookI__2E1BDC42" Association="Self.FK__UserBookD__BookI__2E1BDC42">
+      <End Role="BookDetails" EntitySet="BookDetails" />
+      <End Role="UserBookDetails" EntitySet="UserBookDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserBookD__UserI__2D27B809" Association="Self.FK__UserBookD__UserI__2D27B809">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserBookDetails" EntitySet="UserBookDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__RoleID__267ABA7A" Association="Self.FK__Users__RoleID__267ABA7A">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
