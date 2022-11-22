@@ -1,0 +1,65 @@
+﻿@using eLibrary;
+@model Tuple<Bookcategory, List<BookDetail>>
+@{
+    ViewBag.Title = "GetBooks";
+}
+
+<h2>GetBooks</h2>
+@using (Html.BeginForm("GetBooks", "Book"))
+    {
+        <table>
+            <tr>
+                <td>Enter Bookname </td>
+                <td><input type="text" name="bookcategory" value="name" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Submit Form" /></td>
+            </tr>
+        </table>
+    }
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                BookName
+            </th>
+            <th>
+                AuthorName
+            </th>
+            <th>
+                RackNo
+            </th>
+            <th>
+                Language
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model.Item2)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AuthorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RackNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.C_Language)
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+    
+
+</table>

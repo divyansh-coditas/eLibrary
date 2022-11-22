@@ -1,4 +1,4 @@
-﻿@model IEnumerable<eLibrary.Bookcategory>
+﻿@model eLibrary.Bookcategory
 
 @{
     ViewBag.Title = "Index";
@@ -6,37 +6,16 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </th>
-        <th></th>
-    </tr>
+@*<form action="GetBooks" method="post">
+        <table>
+            <tr>
+                <td>Enter Bookname </td>
+                <td><input type="text" name="name" value="name" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Submit Form" /></td>
+            </tr>
+        </table>
+</form>*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        @if (User.Identity.Name == "Admin")
-        {
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.CategoryId }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.CategoryId })
-            </td>
-        }
-    </tr>
-}
 
-</table>

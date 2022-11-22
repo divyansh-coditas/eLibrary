@@ -12,10 +12,16 @@ namespace eLibrary.Controllers
     {
         // GET: Category
         CategoryDataAccess catdata = new CategoryDataAccess();
+        BookDataAccess bookdata = new BookDataAccess();
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult Get() 
+        {
             var result = catdata.Get();
-            return View(result);
+            return View();
         }
 
         public ActionResult Create() 
@@ -49,6 +55,14 @@ namespace eLibrary.Controllers
         {
             var result = catdata.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult GetBooks(Bookcategory book)
+        {
+            string bookname = book.CategoryName;
+            var result = bookdata.GetBooks(bookname);
+            return View(result);
         }
     }
 }
