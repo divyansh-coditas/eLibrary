@@ -137,6 +137,7 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -162,6 +163,7 @@
     </Compile>
     <Compile Include="Services\BookDataAccess.cs" />
     <Compile Include="Services\CategoryDataAccess.cs" />
+    <Compile Include="Services\SubscrptionDataAccess.cs" />
     <Compile Include="Services\UserDataAccess.cs" />
     <Compile Include="Subscription.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -239,6 +241,9 @@
     <Content Include="Views\Category\GetBooks.cshtml" />
     <Content Include="Views\Category\Get.cshtml" />
     <Content Include="Views\Book\GetBooks.cshtml" />
+    <Content Include="Views\Book\GetBookByName.cshtml" />
+    <Content Include="Views\Subscription\Get.cshtml" />
+    <Content Include="Views\Subscription\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

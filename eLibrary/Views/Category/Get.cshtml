@@ -5,6 +5,19 @@
 }
 
 <h2>Get</h2>
+@using (@Html.BeginForm("GetBooks", "Category"))
+{
+    <table>
+        <tr>
+            <td>Enter CategoryName</td>
+            <td><input type="text" name="CategoryName"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="CategoryName" class="btn btn-primary" /></td>
+        </tr>
+    </table>
+}
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -20,20 +33,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
+            </td>
+        </tr>
+    }
 
 </table>
+@Html.ActionLink("GetAllBooks", "GetBooks", "Book")
+@Html.ActionLink("Subscribe", "Create", "Subscription");

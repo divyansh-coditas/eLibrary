@@ -21,7 +21,7 @@ namespace eLibrary.Controllers
         public ActionResult Get() 
         {
             var result = catdata.Get();
-            return View();
+            return View(result);
         }
 
         public ActionResult Create() 
@@ -58,10 +58,10 @@ namespace eLibrary.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetBooks(Bookcategory book)
+        public ActionResult GetBooks(string CategoryName)
         {
-            string bookname = book.CategoryName;
-            var result = bookdata.GetBooks(bookname);
+            //string bookname = book.CategoryName;
+            var result = bookdata.GetBooks(CategoryName);
             return View(result);
         }
     }

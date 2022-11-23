@@ -1,24 +1,10 @@
 ﻿@model IEnumerable<eLibrary.BookDetail>
 
 @{
-    ViewBag.Title = "GetBooks";
+    ViewBag.Title = "GetBookByName";
 }
 
-<br>
-<br>
-@using (Html.BeginForm("GetBookByName", "Book")) 
-{
-    <table>
-        <tr>
-            <td>Enter Name<td>
-            <td><input type="text" name="BookName"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="BookName" class="btn btn-primary"></td>
-        </tr>
-    </table>
-}
-<h2>GetBooks</h2>
+<h2>GetBookByName</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -81,4 +67,4 @@
 }
 
 </table>
-
+@Html.ActionLink("GetAllBooks","GetBooks","Book");

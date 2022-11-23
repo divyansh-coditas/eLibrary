@@ -55,6 +55,7 @@ namespace eLibrary.Controllers
                 var data = (from us in context.Users
                             where us.UserName == user.UserName && us.C_Password == user.C_Password
                             select us).ToList();
+                TempData["Id"] = data[0].UserId;
                 if (isValid)
                 {
                     FormsAuthentication.SetAuthCookie(user.UserName, false);
@@ -64,7 +65,7 @@ namespace eLibrary.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Category");
+                        return RedirectToAction("Get", "Category");
                     }
                 }
                 ModelState.AddModelError("", "Invalid username or password");

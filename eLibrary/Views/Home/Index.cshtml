@@ -2,30 +2,49 @@
     ViewBag.Title = "Home Page";
 }
 
+@section head{
+    <style type="text/css">
+        body {
+            background-image: url('https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010__340.jpg');
+            margin: 0;
+            background-repeat:no-repeat;
+            min-height: 150vh;
+            background-size: contain;
+            min-width: 100vh;
+        }
+    </style>
+}
+
+<hr>
+
 <div class="jumbotron">
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
 </div>
-
+<br>
+<br>
+<hr>
+<br>
+<br>
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
+        <h2 style="color: white">Getting started</h2>
+        <p style="color: white">
             ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
             enables a clean separation of concerns and gives you full control over markup
             for enjoyable, agile development.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn\-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="col-md-4" style="color:lightgreen">
+        <h2 style="color: white">Get more libraries</h2>
+        <p style="color: white">NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p style="color: white"><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="col-md-4" style="color: lightgreen">
+        <h2 style="color: white">Web Hosting</h2>
+        <p style="color: white">You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p style="color: white"><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
