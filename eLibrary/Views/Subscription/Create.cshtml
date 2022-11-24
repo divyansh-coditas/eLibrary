@@ -1,31 +1,89 @@
 ﻿
 @{
     ViewBag.Title = "Create";
+    var money = ViewBag.Message;
+}
+<br>
+<br>
+<hr>
+
+@if (@money > 0)
+{
+    <div class="table-bordered">
+        @using (Html.BeginForm("Create", "Subscription"))
+        {
+
+            <h2>Payment Details</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="Username" id="Username"></td>
+                        <td><input type="email" name="Email" id="Email"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Date Of Birth</h4>
+            <input type="date" name="date" id="name"><br>
+            <div>
+                <h4>Gender</h4>
+                <input type="radio" name="gender" value="male"> Male<br>
+                <input type="radio" name="gender" value="female"> Female<br>
+            </div>
+            <h4>Payment Details</h4>
+            <label>CardNumber</label><input type="tel" placeholder="1234"><input type="tel" placeholder="1234"><input type="tel" placeholder="1234">
+            <label>CVV</label><select><option>01 Jun</option><option>02 Dec</option></select> <select><option>2023</option><option>2024</option></select>
+            <label>Amount: </label>@money
+            <div>
+                <input type="submit" name="PayNow" value="Submit"/>
+            </div>
+        }
+    </div>
+}
+else
+{
+<center>
+    <div>
+        @using (Html.BeginForm("Create", "Subscription"))
+        {
+            <div class="table-bordered form-horizontal">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="subscribe"><h4>Select Months</h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select name="str">
+                                    <option class="buttonAb">Select..</option>
+                                    <option class="buttonAb" value="1">1Month</option>
+                                    <option class="buttonAb" value="3">3Months</option>
+                                    <option class="buttonAb" value="6">6Months</option>
+                                    <option class="buttonAb" value="6">1Year</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" value="Submit" class="btn btn-primary subscribe1">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+ </center>
 }
 
-@using (Html.BeginForm("Create", "Subscription")) 
-{
-    <table>
-        <thead>
-            <tr>
-                <th>Select Months</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <select name="str">
-                        <option value="3">3Months</option>
-                        <option value="6">6Months</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </td>
-            </tr>
-        </tbody>
-    </table>
-}
+
+    
 

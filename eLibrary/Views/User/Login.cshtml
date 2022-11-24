@@ -1,45 +1,41 @@
-﻿@model eLibrary.User
-
-@{
+﻿@{
     ViewBag.Title = "Login";
 }
+<head>
+    <style>
+        body {
+            background-image: url('https://wallpaperaccess.com/full/124378.jpg');
+        }
+    </style>
+</head>
+<div class="container table-bordered login">
+<center>
+    @using (Html.BeginForm("Login", "User"))
+    {
+        @Html.AntiForgeryToken()
 
-<h2>Login</h2>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label for="name">Username</label>
+                <input type="text" name="name" placeholder="e.g Divyansh"> <br>
+            </div>
 
+            <div class="form-group">
+                <label for="name">Password</label>
+                <input type="password" name="password"> <br>
+            </div>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Login" class="buttonAb" />
+                    @Html.ActionLink("Register", "Create","User", htmlAttributes: new { @class = "buttonAb" })
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.C_Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.C_Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.C_Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-
+    }
+</center>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

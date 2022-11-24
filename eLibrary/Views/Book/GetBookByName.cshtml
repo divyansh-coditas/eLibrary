@@ -6,10 +6,10 @@
 
 <h2>GetBookByName</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+</p>*@
+<table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookId)
@@ -58,13 +58,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.Rating)
         </td>
-        <td>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+        </td>*@
     </tr>
 }
 
 </table>
-@Html.ActionLink("GetAllBooks","GetBooks","Book");
+@Html.ActionLink("GoBackToList","GetBooks","Book")

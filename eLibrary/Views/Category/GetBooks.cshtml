@@ -4,12 +4,13 @@
     ViewBag.Title = "GetBooks";
 }
 
-<h2>GetBooks</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+</p>*@
+<br>
+<br>
+<table class="table table-bordered table-striped getbooks">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookId)
@@ -59,13 +60,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>
-            <td>
+            @*<td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+            </td>*@
         </tr>
     }
 
 </table>
-@Html.ActionLink("Back to Category", "Get", "Category");
+@Html.ActionLink("Back to Category", "Get", "Category")

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<eLibrary.Subscription>
+﻿@model List<eLibrary.Models.SubscribedUser>
 
 @{
     ViewBag.Title = "Get";
@@ -12,13 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserId)
+            UserId   
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            StartDate   
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndDate)
+            EndDate
         </th>
         <th></th>
     </tr>
@@ -34,11 +34,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
-        <td>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SubscriptionId }) |
             @Html.ActionLink("Details", "Details", new { id=item.SubscriptionId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.SubscriptionId })
-        </td>
+        </td>*@
     </tr>
 }
 

@@ -3,27 +3,33 @@
 @{
     ViewBag.Title = "GetBooks";
 }
+<style>
+    body {
+        background-image: url('');
+    }
+</style>
 
 <br>
 <br>
+<div class="table table-bordered table-striped getbooks">
 @using (Html.BeginForm("GetBookByName", "Book")) 
 {
     <table>
         <tr>
-            <td>Enter Name<td>
+            <td>Enter Name:<td>
             <td><input type="text" name="BookName"></td>
         </tr>
         <tr>
-            <td><input type="submit" value="BookName" class="btn btn-primary"></td>
+            <td><input type="submit" value="Search" class="btn getbooks"></td>
         </tr>
     </table>
 }
-<h2>GetBooks</h2>
-
-<p>
+</div>
+<br>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+</p>*@
+<table class="table table-bordered table-striped getbooks">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookId)
@@ -72,12 +78,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.Rating)
         </td>
-        <td>
+    </tr>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+        </td>*@
+    
 }
 
 </table>

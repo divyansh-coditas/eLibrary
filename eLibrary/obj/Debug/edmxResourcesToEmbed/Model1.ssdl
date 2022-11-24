@@ -18,6 +18,7 @@
     <Property Name="_Language" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CategoryId" Type="int" />
     <Property Name="Rating" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="int" />
   </EntityType>
   <EntityType Name="Roles">
     <Key>

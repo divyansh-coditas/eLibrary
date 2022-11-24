@@ -21,6 +21,7 @@
     <Property Name="Rating" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Bookcategory" Relationship="Self.FK__BookDetai__Categ__2B3F6F97" FromRole="BookDetails" ToRole="Bookcategory" />
     <NavigationProperty Name="UserBookDetails" Relationship="Self.FK__UserBookD__BookI__2E1BDC42" FromRole="BookDetails" ToRole="UserBookDetails" />
+    <Property Name="Quantity" Type="Int32" />
   </EntityType>
   <EntityType Name="Role">
     <Key>

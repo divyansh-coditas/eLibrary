@@ -4,51 +4,54 @@
     ViewBag.Title = "Get";
 }
 
-<h2>Get</h2>
-@using (@Html.BeginForm("GetBooks", "Category"))
-{
-    <table>
-        <tr>
-            <td>Enter CategoryName</td>
-            <td><input type="text" name="CategoryName"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="CategoryName" class="btn btn-primary" /></td>
-        </tr>
-    </table>
-}
+<br>
+<br>
+<div class="table-bordered">
 
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+    @using (@Html.BeginForm("GetBooks", "Category"))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
-            </td>
-        </tr>
+        <table>
+            <tr>
+                <td>Enter CategoryName</td>
+                <td><input type="text" name="CategoryName"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Search" class="btn btn-primary" /></td>
+            </tr>
+        </table>
     }
+</div>
+<br>
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
-@Html.ActionLink("GetAllBooks", "GetBooks", "Book")
-@Html.ActionLink("Subscribe", "Create", "Subscription");
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+    @*@Html.ActionLink("GetAllBooks", "GetBooks", "Book")
+        @Html.ActionLink("Subscribe", "Create", "Subscription");*@

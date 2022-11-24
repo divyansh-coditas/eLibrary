@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eLibrary.Services;
+using eLibrary.Models; 
 
 namespace eLibrary.Controllers
 {
@@ -14,7 +15,13 @@ namespace eLibrary.Controllers
         // GET: Subscription
         public ActionResult Get()
         {
-            var result = data.Get();
+            var users = data.Get();
+            List<SubscribedUser> result = new List<SubscribedUser>();
+            foreach (var item in users) 
+            {
+                result.Add(new SubscribedUser { UserId = item.UserId, StartDate = item.StartDate.ToShortDateString(), 
+                    EndDate = item.EndDate.ToShortDateString()});
+            }
             return View(result);
         }
 
@@ -24,18 +31,30 @@ namespace eLibrary.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string str) 
+        public ActionResult Create(string str, string month) 
         {
-            int month = Convert.ToInt32(str);
-            DateTime date = DateTime.Today.AddMonths(month).Date;
-          
-            Subscription subscription = new Subscription() { UserId = Convert.ToInt32(TempData["Id"]), StartDate = DateTime.Today.Date,
-                EndDate = date.Date
-            };
+            if (str != null)
+            {
+                ViewBag.Message = int.Parse(str) * 150;
+                return View(ViewBag.Message);
+            }
+            else
+            {
+                int month1 = Convert.ToInt32(month)/150;
+                DateTime date = DateTime.Today.AddMonths(month1).Date;
+
+                Subscription subscription = new Subscription()
+                {
+                    UserId = Convert.ToInt32(TempData["Id"]),
+                    StartDate = DateTime.Today.Date,
+                    EndDate = date
+                };
+                data.Create(subscription);
+                return RedirectToAction("Get");
+            }
 
 
-            data.Create(subscription);
-            return RedirectToAction("Get");
+            
         }
     }
 }

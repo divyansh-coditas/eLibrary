@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="eLibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="eLibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bookcategory">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -23,6 +23,7 @@
           <Property Name="_Language" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CategoryId" Type="int" />
           <Property Name="Rating" Type="varchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -166,8 +167,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="eLibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -192,6 +192,7 @@
           <Property Name="Rating" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Bookcategory" Relationship="Self.FK__BookDetai__Categ__2B3F6F97" FromRole="BookDetails" ToRole="Bookcategory" />
           <NavigationProperty Name="UserBookDetails" Relationship="Self.FK__UserBookD__BookI__2E1BDC42" FromRole="BookDetails" ToRole="UserBookDetails" />
+          <Property Name="Quantity" Type="Int32" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -359,6 +360,7 @@
           <EntitySetMapping Name="BookDetails">
             <EntityTypeMapping TypeName="eLibraryModel.BookDetail">
               <MappingFragment StoreEntitySet="BookDetails">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="BookId" ColumnName="BookId" />
                 <ScalarProperty Name="BookName" ColumnName="BookName" />
                 <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />

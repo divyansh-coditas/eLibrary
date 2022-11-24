@@ -9,7 +9,7 @@ namespace eLibrary.Controllers
 {
     public class UserController : Controller
     {
-        UserDataAccess userdata = new UserDataAccess();
+         UserDataAccess userdata = new UserDataAccess();
 
         public ActionResult Get()
         {
@@ -47,25 +47,25 @@ namespace eLibrary.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult Login(string name, string password)
         {
             using (var context = new eLibraryEntities())
             {
-                bool isValid = context.Users.Any(u => u.UserName == user.UserName && u.C_Password == user.C_Password);
+                bool isValid = context.Users.Any(u => u.UserName == name && u.C_Password == password);
                 var data = (from us in context.Users
-                            where us.UserName == user.UserName && us.C_Password == user.C_Password
+                            where us.UserName == name && us.C_Password == password
                             select us).ToList();
                 TempData["Id"] = data[0].UserId;
                 if (isValid)
                 {
-                    FormsAuthentication.SetAuthCookie(user.UserName, false);
+                    FormsAuthentication.SetAuthCookie(name, false);
                     if (data[0].RoleID == 1)
                     {
                         return RedirectToAction("Get", "User");
                     }
                     else
                     {
-                        return RedirectToAction("Get", "Category");
+                        return RedirectToAction("GetBooks", "Book");
                     }
                 }
                 ModelState.AddModelError("", "Invalid username or password");

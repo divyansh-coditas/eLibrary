@@ -12,6 +12,7 @@
     <EntitySetMapping Name="BookDetails">
       <EntityTypeMapping TypeName="eLibraryModel.BookDetail">
         <MappingFragment StoreEntitySet="BookDetails">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="BookId" ColumnName="BookId" />
           <ScalarProperty Name="BookName" ColumnName="BookName" />
           <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
