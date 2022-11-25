@@ -21,5 +21,12 @@ namespace eLibrary.Services
             context.SaveChanges();
             return user.UserId;
         }
+
+        public User Get(int id) 
+        {
+            var result = context.Users.Find(id);
+            return result;
+        }
     }
+
 }

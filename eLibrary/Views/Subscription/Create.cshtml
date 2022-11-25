@@ -3,13 +3,18 @@
     ViewBag.Title = "Create";
     var money = ViewBag.Message;
 }
+<style>
+    body {
+        background-image: url('https://th.bing.com/th/id/OIP.AEQeN4pOZIEVgx7vDYXJDwHaE7?pid=ImgDet&rs=1');
+    }
+</style>
 <br>
 <br>
 <hr>
 
 @if (@money > 0)
 {
-    <div class="table-bordered">
+    <div class="table-bordered getbooks">
         @using (Html.BeginForm("Create", "Subscription"))
         {
 
@@ -39,12 +44,13 @@
             <h4>Payment Details</h4>
             <label>CardNumber</label><input type="tel" placeholder="1234"><input type="tel" placeholder="1234"><input type="tel" placeholder="1234">
             <label>CVV</label><select><option>01 Jun</option><option>02 Dec</option></select> <select><option>2023</option><option>2024</option></select>
-            <label>Amount: </label>@money
+            <label>Amount: </label><textarea name="month" style="height:10px">@money</textarea>
             <div>
-                <input type="submit" name="PayNow" value="Submit"/>
+                <input type="submit" name="PayNow" value="Submit" />
             </div>
         }
     </div>
+    
 }
 else
 {
@@ -52,7 +58,7 @@ else
     <div>
         @using (Html.BeginForm("Create", "Subscription"))
         {
-            <div class="table-bordered form-horizontal">
+            <div class="table-bordered form-horizontal getbooks">
                 <table>
                     <thead>
                         <tr>

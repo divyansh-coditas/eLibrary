@@ -17,12 +17,25 @@ namespace eLibrary.Services
 
         public IEnumerable<BookDetail> GetBooks(string name) 
         {
-            //var data = context.BookDetails.ToList();
             var result = from book in context.BookDetails
                          join bookcat in context.Bookcategories on book.CategoryId equals bookcat.CategoryId
                          where bookcat.CategoryName == name
                          select book;
             return result;
+        }
+
+        public BookDetail Get(int id) 
+        {
+            var result = context.BookDetails.Find(id);
+            return result;
+        }
+
+        public BookDetail Update(int id) 
+        {
+            var book = context.BookDetails.Find(id);
+            book.Quantity -= 1;
+            context.SaveChanges();
+            return book;
         }
     }
 }

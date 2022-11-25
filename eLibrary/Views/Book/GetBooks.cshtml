@@ -5,7 +5,7 @@
 }
 <style>
     body {
-        background-image: url('');
+        background-image: url('https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547__340.jpg');
     }
 </style>
 
@@ -29,7 +29,7 @@
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
-<table class="table table-bordered table-striped getbooks">
+<table class="table table-bordered table-striped table-hover getbooks">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookId)
@@ -52,7 +52,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Rating)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -78,12 +83,15 @@
         <td>
             @Html.DisplayFor(modelItem => item.Rating)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.ActionLink("GetAccess", "GetAccess","Userbook", new { id=item.BookId}, htmlAttributes: new { }) |
+            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
     </tr>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>*@
     
 }
 

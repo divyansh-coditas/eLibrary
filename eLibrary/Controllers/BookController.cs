@@ -22,9 +22,11 @@ namespace eLibrary.Controllers
         public ActionResult GetBookByName(string BookName) 
         {
             var result = bookdata.Get().Where(x => x.BookName == BookName);
-            return View(result);
+            if (result != null) 
+            {
+                return View(result);
+            }
+            return View();
         }
-
-
     }
 }

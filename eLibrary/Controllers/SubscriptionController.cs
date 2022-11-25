@@ -27,12 +27,35 @@ namespace eLibrary.Controllers
 
         public ActionResult Create() 
         {
+            var result = data.Get();
+            foreach (var v in result) 
+            {
+                if (v.UserId == Convert.ToInt32(TempData["Id"])) 
+                {
+                    List<Subscription> li = new List<Subscription>();
+                    li.Add(new Subscription { EndDate = v.EndDate });
+                    ViewBag.Message = li[0].EndDate;
+                    return View("View", ViewBag.Message);
+                }
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(string str, string month) 
         {
+            var result = data.Get();
+            foreach (var v in result)
+            {
+                if (v.UserId == Convert.ToInt32(TempData["Id"]))
+                {
+                    List<Subscription> li = new List<Subscription>();
+                    li.Add(new Subscription { EndDate = v.EndDate });
+                    ViewBag.Message = li[0].EndDate;
+                    return View("View", ViewBag.Message);
+                }
+            }
+
             if (str != null)
             {
                 ViewBag.Message = int.Parse(str) * 150;
@@ -49,8 +72,9 @@ namespace eLibrary.Controllers
                     StartDate = DateTime.Today.Date,
                     EndDate = date
                 };
-                data.Create(subscription);
-                return RedirectToAction("Get");
+                
+            
+                return RedirectToAction("GetBooks","Book");
             }
 
 

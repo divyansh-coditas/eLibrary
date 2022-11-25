@@ -3,13 +3,19 @@
 @{
     ViewBag.Title = "GetBookByName";
 }
-
-<h2>GetBookByName</h2>
+<br><br>
+<style>
+    body {
+        background-image: url('https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547__340.jpg');
+    }
+</style>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
-<table class="table table-bordered table-striped">
+
+
+<table class="table table-bordered table-striped getbooks">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookId)
@@ -64,7 +70,8 @@
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>*@
     </tr>
-}
-
+}   
 </table>
+
+
 @Html.ActionLink("GoBackToList","GetBooks","Book")

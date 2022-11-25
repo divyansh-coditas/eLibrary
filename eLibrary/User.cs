@@ -6,7 +6,7 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace eLibrary
 {
     using System;
@@ -20,14 +20,21 @@ namespace eLibrary
             this.Subscriptions = new HashSet<Subscription>();
             this.UserBookDetails = new HashSet<UserBookDetail>();
         }
-    
+        [Required]
         public int UserId { get; set; }
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string C_Password { get; set; }
+        [Required]
         public string ContactNo { get; set; }
+        [Required]
         public string C_Address { get; set; }
+        [Required]
         public string Occupation { get; set; }
+        [Required]
         public int Age { get; set; }
+        [Required]
         public int RoleID { get; set; }
     
         public virtual Role Role { get; set; }
