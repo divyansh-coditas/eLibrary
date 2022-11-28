@@ -64,6 +64,7 @@
           <Property Name="Is_Submitted" Type="bit" />
           <Property Name="Is_Paid" Type="bit" />
           <Property Name="DetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bookname" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -237,6 +238,7 @@
           <Property Name="DetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="BookDetail" Relationship="Self.FK__UserBookD__BookI__2E1BDC42" FromRole="UserBookDetails" ToRole="BookDetails" />
           <NavigationProperty Name="User" Relationship="Self.FK__UserBookD__UserI__2D27B809" FromRole="UserBookDetails" ToRole="Users" />
+          <Property Name="Bookname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -403,6 +405,7 @@
           <EntitySetMapping Name="UserBookDetails">
             <EntityTypeMapping TypeName="eLibraryModel.UserBookDetail">
               <MappingFragment StoreEntitySet="UserBookDetails">
+                <ScalarProperty Name="Bookname" ColumnName="Bookname" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="BookId" ColumnName="BookId" />
                 <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />

@@ -11,7 +11,7 @@ namespace eLibrary.Services
 
         public IEnumerable<BookDetail> Get() 
         {
-            var result = context.BookDetails.ToList();
+            var result = context.BookDetails.ToList().Where(m => m.Quantity > 0);
             return result;
         }
 
@@ -34,6 +34,14 @@ namespace eLibrary.Services
         {
             var book = context.BookDetails.Find(id);
             book.Quantity -= 1;
+            context.SaveChanges();
+            return book;
+        }
+
+        public BookDetail Submit(int id) 
+        {
+            var book = context.BookDetails.Find(id);
+            book.Quantity += 1;
             context.SaveChanges();
             return book;
         }

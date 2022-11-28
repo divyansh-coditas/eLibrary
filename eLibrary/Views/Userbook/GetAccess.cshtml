@@ -1,88 +1,14 @@
-﻿@model IEnumerable<eLibrary.Models.UserBookDetail1>
+﻿@model IEnumerable<eLibrary.UserBookDetail>
 
 @{
     ViewBag.Title = "GetAccess";
 }
-
-
-@if (Model != null)
-{
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IssueDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubmissionDate)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.SubmittedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fine)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Is_Submitted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Is_Paid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DetailId)
-            </th>
-            <th></th>*@
-        </tr>
-    
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IssueDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubmissionDate)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.SubmittedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fine)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Is_Submitted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Is_Paid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DetailId)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>*@
-        </tr>
+<style>
+    body {
+        background-image: url('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg');
+        background-repeat:no-repeat;
+        background-size: cover;
     }
+</style>
 
-    </table>
-}
-else 
-{
-    <h2>You are not authorised</h2>
-}
+<h2 class="getbooks">You are not authorised. Since Your age is less than 18</h2>

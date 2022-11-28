@@ -8,7 +8,7 @@
         }
     </style>
 </head>
-<div class="login">
+<div class="login" style="border-radius:20px">
 <br>
 <center>
     @using (Html.BeginForm("Login", "User"))
@@ -18,18 +18,18 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                <label for="name">Username</label>
-                <input type="text" name="name" placeholder="e.g Divyansh"> <br>
+                <label for="name" style="margin-left:-20px">Username</label>
+                <input type="text" name="name" placeholder="e.g Divyansh" required> <br>
             </div>
 
             <div class="form-group">
-                <label for="name">Password</label>
-                <input type="password" name="password"> <br>
+                <label for="name" style="margin-left:-20px">Password</label>
+                <input type="password" name="password" required> <br>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Login" class="buttonAb" />
+                    <input type="submit" value="Login" class="buttonAb" style="margin-left:-25px" />
                     @Html.ActionLink("Register", "Create","User", htmlAttributes: new { @class = "buttonAb" })
                 </div>
             </div>

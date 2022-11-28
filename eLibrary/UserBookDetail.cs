@@ -23,6 +23,7 @@ namespace eLibrary
         public Nullable<bool> Is_Submitted { get; set; }
         public Nullable<bool> Is_Paid { get; set; }
         public int DetailId { get; set; }
+        public string Bookname { get; set; }
     
         public virtual BookDetail BookDetail { get; set; }
         public virtual User User { get; set; }

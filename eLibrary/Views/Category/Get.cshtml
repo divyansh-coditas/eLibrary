@@ -3,10 +3,16 @@
 @{
     ViewBag.Title = "Get";
 }
-
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
 <br>
 <br>
-<div class="table-bordered">
+<div class="table-bordered" style="padding:10px; border-radius:10px">
 
     @using (@Html.BeginForm("GetBooks", "Category"))
     {
@@ -16,7 +22,7 @@
                 <td><input type="text" name="CategoryName"></td>
             </tr>
             <tr>
-                <td><input type="submit" value="Search" class="btn btn-primary" /></td>
+                <td><input type="submit" value="Search" class="btn" /></td>
             </tr>
         </table>
     }
@@ -25,7 +31,7 @@
     @*<p>
             @Html.ActionLink("Create New", "Create")
         </p>*@
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" style="border: 1px solid black">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.CategoryId)
@@ -33,7 +39,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.CategoryName)
             </th>
-            <th></th>
+            
         </tr>
 
         @foreach (var item in Model)

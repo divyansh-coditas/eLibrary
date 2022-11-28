@@ -4,13 +4,17 @@
     ViewBag.Title = "GetBooks";
 }
 
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
 <br>
 <br>
-<table class="table table-bordered table-striped getbooks">
+<table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookId)
@@ -33,7 +37,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Rating)
         </th>
-        <th></th>
+       
     </tr>
 
     @foreach (var item in Model)
@@ -69,4 +73,3 @@
     }
 
 </table>
-@Html.ActionLink("Back to Category", "Get", "Category")

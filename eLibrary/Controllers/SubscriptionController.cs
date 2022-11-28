@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using eLibrary.Services;
-using eLibrary.Models; 
+using eLibrary.Services; 
 
 namespace eLibrary.Controllers
 {
@@ -16,27 +15,16 @@ namespace eLibrary.Controllers
         public ActionResult Get()
         {
             var users = data.Get();
-            List<SubscribedUser> result = new List<SubscribedUser>();
-            foreach (var item in users) 
-            {
-                result.Add(new SubscribedUser { UserId = item.UserId, StartDate = item.StartDate.ToShortDateString(), 
-                    EndDate = item.EndDate.ToShortDateString()});
-            }
-            return View(result);
+            return View(users);
         }
 
         public ActionResult Create() 
         {
-            var result = data.Get();
-            foreach (var v in result) 
+            var result = data.Get().Where(m => m.UserId == Convert.ToInt32(Session["Id"])).FirstOrDefault();
+            if (result != null)
             {
-                if (v.UserId == Convert.ToInt32(TempData["Id"])) 
-                {
-                    List<Subscription> li = new List<Subscription>();
-                    li.Add(new Subscription { EndDate = v.EndDate });
-                    ViewBag.Message = li[0].EndDate;
-                    return View("View", ViewBag.Message);
-                }
+                ViewBag.Message = result.EndDate.ToShortDateString();
+                return View("View");
             }
             return View();
         }
@@ -44,17 +32,23 @@ namespace eLibrary.Controllers
         [HttpPost]
         public ActionResult Create(string str, string month) 
         {
-            var result = data.Get();
-            foreach (var v in result)
+            var result = data.Get().Where(m => m.UserId == Convert.ToInt32(Session["Id"])).FirstOrDefault();
+            if (result != null)
             {
-                if (v.UserId == Convert.ToInt32(TempData["Id"]))
-                {
-                    List<Subscription> li = new List<Subscription>();
-                    li.Add(new Subscription { EndDate = v.EndDate });
-                    ViewBag.Message = li[0].EndDate;
-                    return View("View", ViewBag.Message);
-                }
+                ViewBag.Message = result.EndDate;
+                return View("View");
             }
+            //var result = data.Get();
+            //foreach (var v in result)
+            //{
+            //    if (v.UserId == Convert.ToInt32(Session["Id"]))
+            //    {
+            //        List<Subscription> li = new List<Subscription>();
+            //        li.Add(new Subscription { EndDate = v.EndDate });
+            //        ViewBag.Message = li[0].EndDate;
+            //        return View("View", ViewBag.Message);
+            //    }
+            //}
 
             if (str != null)
             {
@@ -68,17 +62,13 @@ namespace eLibrary.Controllers
 
                 Subscription subscription = new Subscription()
                 {
-                    UserId = Convert.ToInt32(TempData["Id"]),
+                    UserId = Convert.ToInt32(Session["Id"]),
                     StartDate = DateTime.Today.Date,
                     EndDate = date
                 };
-                
-            
+                data.Create(subscription);
                 return RedirectToAction("GetBooks","Book");
-            }
-
-
-            
+            }   
         }
     }
 }

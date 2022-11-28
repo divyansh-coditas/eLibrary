@@ -1,11 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Create";
     var money = ViewBag.Message;
 }
 <style>
     body {
-        background-image: url('https://th.bing.com/th/id/OIP.AEQeN4pOZIEVgx7vDYXJDwHaE7?pid=ImgDet&rs=1');
+        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 </style>
 <br>
@@ -14,12 +15,12 @@
 
 @if (@money > 0)
 {
-    <div class="table-bordered getbooks">
+    <div class="table-bordered">
         @using (Html.BeginForm("Create", "Subscription"))
         {
 
             <h2>Payment Details</h2>
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" style="border: 4px solid double">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -44,7 +45,8 @@
             <h4>Payment Details</h4>
             <label>CardNumber</label><input type="tel" placeholder="1234"><input type="tel" placeholder="1234"><input type="tel" placeholder="1234">
             <label>CVV</label><select><option>01 Jun</option><option>02 Dec</option></select> <select><option>2023</option><option>2024</option></select>
-            <label>Amount: </label><textarea name="month" style="height:10px">@money</textarea>
+            <label>Amount: </label>
+            <textarea name="month" style="height:15px">@money</textarea>
             <div>
                 <input type="submit" name="PayNow" value="Submit" />
             </div>
@@ -58,7 +60,7 @@ else
     <div>
         @using (Html.BeginForm("Create", "Subscription"))
         {
-            <div class="table-bordered form-horizontal getbooks">
+            <div class="table-bordered form-horizontal">
                 <table>
                     <thead>
                         <tr>

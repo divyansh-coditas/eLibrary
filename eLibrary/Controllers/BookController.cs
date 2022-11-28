@@ -15,7 +15,7 @@ namespace eLibrary.Controllers
 
         public ActionResult GetBooks()
         {
-            var result = bookdata.Get();
+            var result = bookdata.Get().Where(m => m.Quantity > 0);
             return View(result);
         }
 
@@ -27,6 +27,11 @@ namespace eLibrary.Controllers
                 return View(result);
             }
             return View();
+        }
+
+        public ActionResult GetAccess(int id) 
+        {
+            return RedirectToAction("GetAccess");
         }
     }
 }

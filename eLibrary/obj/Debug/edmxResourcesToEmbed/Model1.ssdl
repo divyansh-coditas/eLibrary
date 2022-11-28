@@ -59,6 +59,7 @@
     <Property Name="Is_Submitted" Type="bit" />
     <Property Name="Is_Paid" Type="bit" />
     <Property Name="DetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bookname" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Users">
     <Key>

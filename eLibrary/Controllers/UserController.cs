@@ -32,7 +32,7 @@ namespace eLibrary.Controllers
             if (!isValid)
             {
                 var response = userdata.Create(user);
-                return RedirectToAction("Create");
+                return RedirectToAction("Login");
             }
             else
             {
@@ -55,7 +55,7 @@ namespace eLibrary.Controllers
                 var data = (from us in context.Users
                             where us.UserName == name && us.C_Password == password
                             select us).ToList();
-                TempData["Id"] = data[0].UserId;
+                Session["Id"] = data[0].UserId;
                 if (isValid)
                 {
                     FormsAuthentication.SetAuthCookie(name, false);

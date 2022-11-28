@@ -6,75 +6,48 @@
 <head>
     <style>
         body {
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Books_HD_%288314929977%29.jpg/1200px-Books_HD_%288314929977%29.jpg');
-            /*background-repeat:no-repeat;*/
-            background-size:cover;
+            background-image: url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGJvb2t8ZW58MHx8MHx8&w=1000&q=80');
+            background-size: cover;
         }
     </style>
 </head>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <br><br>
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2 register" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.C_Password, htmlAttributes: new { @class = "control-label col-md-2 register" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.C_Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.C_Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-2 register" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.C_Address, htmlAttributes: new { @class = "control-label col-md-2 register" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.C_Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.C_Address, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Occupation, htmlAttributes: new { @class = "control-label col-md-2 register" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Occupation, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Occupation, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2 register" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Register" class="buttonAb" />
-                @Html.ActionLink("Login","Login","User",htmlAttributes: new {@class = "buttonAb" })
-            </div>
-        </div>
-    </div>
+    
+    <table style="margin-top: 100px; border-collapse:separate; border-spacing: 10px 15px">
+        <tr>
+            <td><label>Username:</label></td>
+            <td>@Html.TextBoxFor(m => m.UserName)</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td><label>Password:</label></td>
+            <td>@Html.TextBoxFor(m => m.C_Password)</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td><label>ContactNo:</label></td><td>@Html.TextBoxFor(m => m.ContactNo)</td>
+        <tr>
+        <tr>
+            <td><label>Address:</label></td>
+            <td>@Html.TextBoxFor(m => m.C_Address)</td>
+        </tr>
+        <tr>
+            <td><label>Ocuupation:</label></td>
+            <td>@Html.TextBoxFor(m => m.Occupation)</td>
+        </tr>
+        <tr>
+            <td><label>Age:</label></td>
+            <td>@Html.TextBoxFor(m => m.Age)</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Register" class="buttonAb"></td>
+            <td>@Html.ActionLink("Login", "Login", "User", htmlAttributes: new { @class = "buttonAb" })</td>
+        </tr>
+    </table>
 }
 
 @section Scripts {

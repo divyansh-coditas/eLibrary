@@ -6,7 +6,9 @@
 <br><br>
 <style>
     body {
-        background-image: url('https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547__340.jpg');
+        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 </style>
 
@@ -15,7 +17,7 @@
 </p>*@
 
 
-<table class="table table-bordered table-striped getbooks">
+<table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookId)
@@ -64,14 +66,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.Rating)
         </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>*@
+        <td>
+            @Html.ActionLink("GetAccess", "GetAccess", "Userbook", new { id = item.BookId }, htmlAttributes: new { @class = "buttonAb" })
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
     </tr>
 }   
 </table>
 
-
-@Html.ActionLink("GoBackToList","GetBooks","Book")

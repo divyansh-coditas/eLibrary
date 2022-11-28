@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "View";
+    var money = ViewBag.Money;
+}
+
+<div class="table-bordered getbooks">
+    @using (Html.BeginForm("Submit", "Userbook"))
+    {
+
+        <h2>Payment Details</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Username</th>
+
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="Username" id="Username"></td>
+                    <td><input type="email" name="Email" id="Email"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Date Of Birth</h4>
+        <input type="date" name="date" id="name"><br>
+        <div>
+            <h4>Gender</h4>
+            <input type="radio" name="gender" value="male"> Male<br>
+            <input type="radio" name="gender" value="female"> Female<br>
+        </div>
+        <h4>Payment Details</h4>
+        <label>CardNumber</label><input type="tel" placeholder="1234"><input type="tel" placeholder="1234"><input type="tel" placeholder="1234">
+        <label>CVV</label><select><option>01 Jun</option><option>02 Dec</option></select> <select><option>2023</option><option>2024</option></select>
+        <label>Amount: </label><textarea name="month" style="height:10px">@money</textarea>
+        <div>
+            <input type="submit" name="is_paid" value="true"/>
+        </div>
+    }
+</div>
+

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using eLibrary;
-using eLibrary.Models;
 
 namespace eLibrary.Services
 {
@@ -23,37 +22,34 @@ namespace eLibrary.Services
             return userBookDetail.UserId;
         }
 
-        public IEnumerable<UserBookDetail1> Access(int id, int val) 
+        public UserBookDetail Access(int bookid, int userid) 
         {
             BookDataAccess bookdata = new BookDataAccess();
-            UserBookDataAccess user = new UserBookDataAccess();
+            UserBookDataAccess userbooks = new UserBookDataAccess();
             UserDataAccess users = new UserDataAccess();
-            bookdata.Update(id);
-            UserBookDetail userbookdetail1 = new UserBookDetail()
+            var bookDetail = bookdata.Get(bookid);
+            bookdata.Update(bookid);
+            UserBookDetail userbookdetail = new UserBookDetail()
             {
-                UserId = val,
-                BookId = id,
+                UserId = userid,
+                BookId = bookid,
+                Bookname = bookDetail.BookName,
                 IssueDate = DateTime.Now,
                 SubmissionDate = DateTime.Now.AddDays(7),
             };
-            user.Create(userbookdetail1);
-            List<UserBookDetail1> items = new List<UserBookDetail1>();
-            var result1 = user.Get();
-            foreach (var item in result1)
-            {
-                if (item.UserId == val)
-                {
-                    items.Add(new UserBookDetail1
-                    {
-                        UserId = item.UserId,
-                        BookId = item.BookId,
-                        IssueDate = item.IssueDate.ToShortDateString(),
-                        SubmissionDate = item.SubmissionDate.ToShortDateString()
-                    }); ;
-                }
-            }
+            userbooks.Create(userbookdetail);
+            return userbookdetail;
+        }
 
-            return items;
+        public UserBookDetail Update(int id,int fine) 
+        {
+            var result = context.UserBookDetails.ToList().Where(m => m.BookId == id).FirstOrDefault();
+            result.SubmittedOn = DateTime.Now;
+            result.Is_Submitted = true;
+            result.Fine = fine;
+            result.Is_Paid = true;
+            context.SaveChanges();
+            return result;
         }
     }
 }

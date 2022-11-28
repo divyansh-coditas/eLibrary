@@ -5,13 +5,14 @@
 }
 <style>
     body {
-        background-image: url('https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547__340.jpg');
+        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+        background-size: cover;
     }
 </style>
 
 <br>
 <br>
-<div class="table table-bordered table-striped getbooks">
+<div class="table table-bordered table-striped" style="padding:5px; border-radius: 10px">
 @using (Html.BeginForm("GetBookByName", "Book")) 
 {
     <table>
@@ -20,7 +21,7 @@
             <td><input type="text" name="BookName"></td>
         </tr>
         <tr>
-            <td><input type="submit" value="Search" class="btn getbooks"></td>
+            <td><input type="submit" value="Search" class="btn"></td>
         </tr>
     </table>
 }
@@ -29,7 +30,7 @@
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
-<table class="table table-bordered table-striped table-hover getbooks">
+<table class="table table-bordered table-striped table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookId)
@@ -87,7 +88,7 @@
             @Html.DisplayFor(modelItem => item.Quantity)
         </td>
         <td>
-            @Html.ActionLink("GetAccess", "GetAccess","Userbook", new { id=item.BookId}, htmlAttributes: new { }) |
+            @Html.ActionLink("GetAccess", "GetAccess","Userbook", new { id = item.BookId }, htmlAttributes: new {@class = "buttonAb" })
             @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
         </td>

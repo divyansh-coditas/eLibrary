@@ -1,4 +1,4 @@
-﻿@model List<eLibrary.Models.SubscribedUser>
+﻿@model IEnumerable<eLibrary.Subscription>
 
 @{
     ViewBag.Title = "Get";
@@ -29,10 +29,10 @@
             @Html.DisplayFor(modelItem => item.UserId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
+            @item.StartDate.ToShortDateString()
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
+            @item.EndDate.ToShortDateString()
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SubscriptionId }) |
