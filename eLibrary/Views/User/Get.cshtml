@@ -3,25 +3,27 @@
 @{
     ViewBag.Title = "Get";
 }
+<br><br><br>
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+        background-size: cover;
+    }
+</style>
 
-<h2>Get</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-bordered table-striped" style="border-radius: 10px; border: 2px solid; border-color:black">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.C_Password)
+            @Html.DisplayNameFor(model => model.UserPassword)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ContactNo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.C_Address)
+            @Html.DisplayNameFor(model => model.UserAddress)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Occupation)
@@ -32,7 +34,6 @@
         <th>
             @Html.DisplayNameFor(model => model.RoleID)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -41,13 +42,13 @@
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.C_Password)
+            @Html.DisplayFor(modelItem => item.UserPassword)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ContactNo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.C_Address)
+            @Html.DisplayFor(modelItem => item.UserAddress)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Occupation)
@@ -58,13 +59,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.RoleID)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
-        </td>
     </tr>
 }
 
 </table>
-@Html.ActionLink("BookCategory","Index","Category");

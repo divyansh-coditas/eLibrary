@@ -3,12 +3,13 @@
 @{
     ViewBag.Title = "Get";
 }
+<style>
+    body {
+        background-image: url(https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80);
+        background-size: cover;
+    }
+</style>
 
-<h2>Get</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -34,11 +35,6 @@
         <td>
             @item.EndDate.ToShortDateString()
         </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SubscriptionId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SubscriptionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SubscriptionId })
-        </td>*@
     </tr>
 }
 

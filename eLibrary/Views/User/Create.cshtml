@@ -17,37 +17,36 @@
 {
     @Html.AntiForgeryToken()
     
-    <table style="margin-top: 100px; border-collapse:separate; border-spacing: 10px 15px">
-        <tr>
-            <td><label>Username:</label></td>
-            <td>@Html.TextBoxFor(m => m.UserName)</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td><label>Password:</label></td>
-            <td>@Html.TextBoxFor(m => m.C_Password)</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td><label>ContactNo:</label></td><td>@Html.TextBoxFor(m => m.ContactNo)</td>
-        <tr>
-        <tr>
-            <td><label>Address:</label></td>
-            <td>@Html.TextBoxFor(m => m.C_Address)</td>
-        </tr>
-        <tr>
-            <td><label>Ocuupation:</label></td>
-            <td>@Html.TextBoxFor(m => m.Occupation)</td>
-        </tr>
-        <tr>
-            <td><label>Age:</label></td>
-            <td>@Html.TextBoxFor(m => m.Age)</td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Register" class="buttonAb"></td>
-            <td>@Html.ActionLink("Login", "Login", "User", htmlAttributes: new { @class = "buttonAb" })</td>
-        </tr>
-    </table>
+<table style="margin-top: 100px; border-collapse:separate; border-spacing: 10px 15px">
+    <tr>
+        <td><label>Username:</label></td>
+        <td>@Html.TextBoxFor(m => m.UserName, new { @Value = @Model.UserName, @required = "required" })</td>
+    </tr>
+    <tr>
+        <td><label>Password:</label></td>
+        <td>@Html.TextBoxFor(m => m.UserPassword, new { @Value = @Model.UserPassword, @required = "required" })</td>
+    </tr>
+    <tr>
+        <td><label>ContactNo:</label></td>
+        <td>@Html.TextBoxFor(m => m.ContactNo, new { @Value = @Model.ContactNo, @required = "required" })</td>
+    </tr>
+    <tr>
+        <td><label>Address:</label></td>
+        <td>@Html.TextBoxFor(m => m.UserAddress, new { @Value = @Model.UserAddress, @required = "required" })</td>
+    </tr>
+    <tr>
+        <td><label>Ocuupation:</label></td>
+        <td>@Html.TextBoxFor(m => m.Occupation, new { @Value = @Model.Occupation, @required = "required" })</td>
+    </tr>
+    <tr>
+        <td><label>Age:</label></td>
+        <td>@Html.TextBoxFor(m => m.Age, new { @Value = @Model.Age, @required = "required" })</td>
+    </tr>
+    <tr>
+        <td><input type="submit" value="Register" class="buttonAb"></td>
+        <td>@Html.ActionLink("Login", "Login", "User", htmlAttributes: new { @class = "buttonAb" })</td>
+    </tr>
+</table>
 }
 
 @section Scripts {

@@ -2,8 +2,20 @@
     ViewBag.Title = "View";
     var money = ViewBag.Money;
 }
-
-<div class="table-bordered getbooks">
+<br><br><br><br>
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+        background-size: cover;
+    }
+</style>
+<script>
+    function js()
+    {
+        return true;
+    }
+</script>
+<div class="table-bordered" style="background-color: lightyellow; border: 2px solid; border-color:black; padding:8px 8px 8px 8px" >
     @using (Html.BeginForm("Submit", "Userbook"))
     {
 
@@ -18,24 +30,24 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text" name="Username" id="Username"></td>
-                    <td><input type="email" name="Email" id="Email"></td>
+                    <td style="background-color:lightyellow"><input type="text" name="Username" id="Username" required></td>
+                    <td style="background-color:lightyellow"><input type="email" name="Email" id="Email" required></td>
                 </tr>
             </tbody>
         </table>
         <h4>Date Of Birth</h4>
-        <input type="date" name="date" id="name"><br>
+        <input type="date" name="date" id="name" required><br>
         <div>
             <h4>Gender</h4>
-            <input type="radio" name="gender" value="male"> Male<br>
-            <input type="radio" name="gender" value="female"> Female<br>
+            <input type="radio" name="gender" value="male" required> Male<br>
+            <input type="radio" name="gender" value="female" required> Female<br>
         </div>
         <h4>Payment Details</h4>
-        <label>CardNumber</label><input type="tel" placeholder="1234"><input type="tel" placeholder="1234"><input type="tel" placeholder="1234">
-        <label>CVV</label><select><option>01 Jun</option><option>02 Dec</option></select> <select><option>2023</option><option>2024</option></select>
-        <label>Amount: </label><textarea name="month" style="height:10px">@money</textarea>
+        <label>CardNumber</label><input type="tel" placeholder="1234" required><input type="tel" placeholder="1234" required><input type="tel" placeholder="1234" required>
+        <label>CVV</label><select><option>01Jun</option><option>10Dec</option></select> <select><option>2023</option><option>2024</option></select>
+        <label>Amount: </label><input type="hidden" name="str" value="true"><label id="mon" style="height:10px">@money</label>
         <div>
-            <input type="submit" name="is_paid" value="true"/>
+            <input type="submit" value="Submit" class="btn btn-primary buttonAb"/>
         </div>
     }
 </div>

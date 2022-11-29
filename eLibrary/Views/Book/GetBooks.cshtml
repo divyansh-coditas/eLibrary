@@ -12,29 +12,35 @@
 
 <br>
 <br>
-<div class="table table-bordered table-striped" style="padding:5px; border-radius: 10px">
-@using (Html.BeginForm("GetBookByName", "Book")) 
-{
-    <table>
-        <tr>
-            <td>Enter Name:<td>
-            <td><input type="text" name="BookName"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Search" class="btn"></td>
-        </tr>
-    </table>
+@if (User.IsInRole("User")) { 
+    <div class="table table-bordered table-striped" style="padding:5px; border: 2px solid; border-color:black; border-radius: 10px">
+        @using (Html.BeginForm("GetBookByName", "Book"))
+        {
+            <table>
+                <tr>
+                    <td>Enter Name:
+                    <td>
+                    <td><input type="text" name="BookName"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Search" class="btn"></td>
+                </tr>
+            </table>
+        }
+    </div>
 }
-</div>
+else
+{
+    <p>
+        @Html.ActionLink("Create New", "Create", new { }, htmlAttributes: new {@class = "buttonAb" })
+    </p>
+}
 <br>
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped" style="border-radius: 10px; border: 2px solid; border-color:black">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.BookId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.BookName)
         </th>
@@ -45,11 +51,11 @@
             @Html.DisplayNameFor(model => model.RackNo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.C_Language)
+            @Html.DisplayNameFor(model => model.BookLanguage)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Rating)
         </th>
@@ -61,40 +67,47 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuthorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RackNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.C_Language)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.ActionLink("GetAccess", "GetAccess","Userbook", new { id = item.BookId }, htmlAttributes: new {@class = "buttonAb" })
-            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-        </td>
-    </tr>
-    
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RackNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookLanguage)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BookId }, htmlAttributes: new {@class = "buttonAb"}) 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BookId}, htmlAttributes: new {@class = "buttonAb" })
+                }
+                else
+                {
+                    @Html.ActionLink("GetAccess", "GetAccess", "Userbook", new { id = item.BookId }, htmlAttributes: new { @class = "buttonAb" })
+                }
+            </td>
+        </tr>
+
+    }
 
 </table>
 

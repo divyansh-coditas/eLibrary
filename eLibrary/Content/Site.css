@@ -77,4 +77,8 @@ textarea {
     border: 4px solid double;
 }
 
+td, th {
+    text-align: center;
+}
+
 

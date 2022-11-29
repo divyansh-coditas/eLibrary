@@ -12,12 +12,12 @@
     <EntitySetMapping Name="BookDetails">
       <EntityTypeMapping TypeName="eLibraryModel.BookDetail">
         <MappingFragment StoreEntitySet="BookDetails">
+          <ScalarProperty Name="BookLanguage" ColumnName="BookLanguage" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="BookId" ColumnName="BookId" />
           <ScalarProperty Name="BookName" ColumnName="BookName" />
           <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
           <ScalarProperty Name="RackNo" ColumnName="RackNo" />
-          <ScalarProperty Name="C_Language" ColumnName="_Language" />
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
         </MappingFragment>
@@ -71,16 +71,25 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="eLibraryModel.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="C_Password" ColumnName="_Password" />
           <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-          <ScalarProperty Name="C_Address" ColumnName="_Address" />
           <ScalarProperty Name="Occupation" ColumnName="Occupation" />
           <ScalarProperty Name="Age" ColumnName="Age" />
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_getAllSubscribedUser" FunctionName="eLibraryModel.Store.sp_getAllSubscribedUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eLibraryModel.sp_getAllSubscribedUser_Result">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

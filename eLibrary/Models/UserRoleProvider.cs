@@ -37,14 +37,15 @@ namespace eLibrary.Models
 
         public override string[] GetRolesForUser(string username)
         {
-            using (var context = new eLibraryEntities()) 
-            {
+            var context = new eLibraryEntities();
+           
                 var result = (from user in context.Users
                              join role in context.Roles
                              on user.RoleID equals role.RoleId
+                             where user.UserName == username
                              select role.Role1).ToArray();
                 return result;
-            }
+           
         }
 
         public override string[] GetUsersInRole(string roleName)
@@ -54,7 +55,20 @@ namespace eLibrary.Models
 
         public override bool IsUserInRole(string username, string roleName)
         {
-            throw new NotImplementedException();
+            var context = new eLibraryEntities();
+            var result = (from user in context.Users
+                          join role in context.Roles
+                          on user.RoleID equals role.RoleId
+                          where user.UserName == username
+                          select role.Role1).FirstOrDefault();
+            if (roleName == result)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
         }
 
         public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)

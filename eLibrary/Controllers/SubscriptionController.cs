@@ -12,12 +12,14 @@ namespace eLibrary.Controllers
         SubscrptionDataAccess data = new SubscrptionDataAccess();
 
         // GET: Subscription
+        [Authorize (Roles = "Admin")]
         public ActionResult Get()
         {
             var users = data.Get();
             return View(users);
         }
 
+        [Authorize (Roles = "User")]
         public ActionResult Create() 
         {
             var result = data.Get().Where(m => m.UserId == Convert.ToInt32(Session["Id"])).FirstOrDefault();
@@ -38,17 +40,6 @@ namespace eLibrary.Controllers
                 ViewBag.Message = result.EndDate;
                 return View("View");
             }
-            //var result = data.Get();
-            //foreach (var v in result)
-            //{
-            //    if (v.UserId == Convert.ToInt32(Session["Id"]))
-            //    {
-            //        List<Subscription> li = new List<Subscription>();
-            //        li.Add(new Subscription { EndDate = v.EndDate });
-            //        ViewBag.Message = li[0].EndDate;
-            //        return View("View", ViewBag.Message);
-            //    }
-            //}
 
             if (str != null)
             {
@@ -69,6 +60,12 @@ namespace eLibrary.Controllers
                 data.Create(subscription);
                 return RedirectToAction("GetBooks","Book");
             }   
+        }
+
+        public ActionResult GetAllSubscribedUser() 
+        {
+            var result = data.GetAllSubscribedUser();
+            return View(result);
         }
     }
 }

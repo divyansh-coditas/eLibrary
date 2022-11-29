@@ -23,12 +23,12 @@ namespace eLibrary
     
         public int UserId { get; set; }
         public string UserName { get; set; }
-        public string C_Password { get; set; }
         public string ContactNo { get; set; }
-        public string C_Address { get; set; }
         public string Occupation { get; set; }
         public int Age { get; set; }
         public int RoleID { get; set; }
+        public string UserPassword { get; set; }
+        public string UserAddress { get; set; }
     
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

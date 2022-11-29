@@ -12,16 +12,11 @@
     }
 </style>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-
-
 <table class="table table-bordered table-striped">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.BookId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.BookName)
         </th>
@@ -32,11 +27,11 @@
             @Html.DisplayNameFor(model => model.RackNo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.C_Language)
+            @Html.DisplayNameFor(model => model.BookLanguage)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Rating)
         </th>
@@ -45,9 +40,9 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.BookId)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.BookName)
         </td>
@@ -58,19 +53,16 @@
             @Html.DisplayFor(modelItem => item.RackNo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.C_Language)
+            @Html.DisplayFor(modelItem => item.BookLanguage)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Rating)
         </td>
         <td>
             @Html.ActionLink("GetAccess", "GetAccess", "Userbook", new { id = item.BookId }, htmlAttributes: new { @class = "buttonAb" })
-            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
         </td>
     </tr>
 }   

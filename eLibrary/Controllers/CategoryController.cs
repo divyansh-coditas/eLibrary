@@ -10,7 +10,6 @@ namespace eLibrary.Controllers
     [Authorize]
     public class CategoryController : Controller
     {
-        // GET: Category
         CategoryDataAccess catdata = new CategoryDataAccess();
         BookDataAccess bookdata = new BookDataAccess();
         public ActionResult Index()
@@ -34,7 +33,7 @@ namespace eLibrary.Controllers
         public ActionResult Create(Bookcategory bookcategory) 
         {
             var result = catdata.create(bookcategory);
-            return View(result);
+            return RedirectToAction("Get","Category");
         }
 
         public ActionResult Edit() 
@@ -47,14 +46,14 @@ namespace eLibrary.Controllers
         public ActionResult Edit(int id, Bookcategory bookcategory) 
         { 
             var result = catdata.Update(id, bookcategory);
-            return RedirectToAction("Index");
+            return RedirectToAction("Get");
         }
 
         
         public ActionResult Delete(int id) 
         {
             var result = catdata.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Get");
         }
 
         [HttpPost]

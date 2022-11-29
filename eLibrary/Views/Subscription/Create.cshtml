@@ -12,10 +12,14 @@
 <br>
 <br>
 <hr>
-
+<script>
+    function successfullySubscribed() {
+        window.alert('successfullySubscribed');
+    }
+</script>
 @if (@money > 0)
 {
-    <div class="table-bordered">
+    <div class="table-bordered" style="background-color: lightyellow; border: 2px solid; border-color:black; padding:8px 8px 8px 8px">
         @using (Html.BeginForm("Create", "Subscription"))
         {
 
@@ -30,8 +34,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" name="Username" id="Username"></td>
-                        <td><input type="email" name="Email" id="Email"></td>
+                        <td style="background-color:lightyellow"><input type="text" name="Username" id="Username" required></td>
+                        <td style="background-color:lightyellow"><input type="email" name="Email" id="Email" required></td>
                     </tr>
                 </tbody>
             </table>
@@ -39,16 +43,16 @@
             <input type="date" name="date" id="name"><br>
             <div>
                 <h4>Gender</h4>
-                <input type="radio" name="gender" value="male"> Male<br>
-                <input type="radio" name="gender" value="female"> Female<br>
+                <input type="radio" name="gender" value="male" required> Male<br>
+                <input type="radio" name="gender" value="female" required> Female<br>
             </div>
             <h4>Payment Details</h4>
-            <label>CardNumber</label><input type="tel" placeholder="1234"><input type="tel" placeholder="1234"><input type="tel" placeholder="1234">
-            <label>CVV</label><select><option>01 Jun</option><option>02 Dec</option></select> <select><option>2023</option><option>2024</option></select>
+            <label>CardNumber</label><input type="tel" required><input type="tel" required><input type="tel" required>
+            <label>CVV</label><select required><option>01 Jun</option><option>02 Dec</option></select> <select><option>2023</option><option>2024</option></select>
             <label>Amount: </label>
-            <textarea name="month" style="height:15px">@money</textarea>
+            <label style="height:15px"><textarea name="month">@money</textarea></label>
             <div>
-                <input type="submit" name="PayNow" value="Submit" />
+                <input type="submit" name="PayNow" onclick="successfullySubscribed()" value="Submit" />
             </div>
         }
     </div>
@@ -60,7 +64,7 @@ else
     <div>
         @using (Html.BeginForm("Create", "Subscription"))
         {
-            <div class="table-bordered form-horizontal">
+            <div class="table-bordered form-horizontal" style="border: 2px solid; border-color:black">
                 <table>
                     <thead>
                         <tr>
@@ -70,7 +74,7 @@ else
                     <tbody>
                         <tr>
                             <td>
-                                <select name="str">
+                                <select name="str" style="margin-left:15px" required>
                                     <option class="buttonAb">Select..</option>
                                     <option class="buttonAb" value="1">1Month</option>
                                     <option class="buttonAb" value="3">3Months</option>
@@ -81,7 +85,7 @@ else
                         </tr>
                         <tr>
                             <td>
-                                <input type="submit" value="Submit" class="btn btn-primary subscribe1">
+                                <input type="submit" value="Submit" style="margin-left:20px" class="btn btn-primary subscribe1">
                             </td>
                         </tr>
                     </tbody>

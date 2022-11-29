@@ -27,23 +27,34 @@ namespace eLibrary.Services
             BookDataAccess bookdata = new BookDataAccess();
             UserBookDataAccess userbooks = new UserBookDataAccess();
             UserDataAccess users = new UserDataAccess();
+            SubscrptionDataAccess subscribe = new SubscrptionDataAccess();
+            DateTime date;
             var bookDetail = bookdata.Get(bookid);
             bookdata.Update(bookid);
+            var isvalid = subscribe.Get().Any(m => m.UserId == userid);
+            if (isvalid) 
+            {
+                date = DateTime.Now.AddDays(14);
+            }
+            else
+            {
+                date = DateTime.Now.AddDays(7);
+            }
             UserBookDetail userbookdetail = new UserBookDetail()
             {
                 UserId = userid,
                 BookId = bookid,
                 Bookname = bookDetail.BookName,
                 IssueDate = DateTime.Now,
-                SubmissionDate = DateTime.Now.AddDays(7),
+                SubmissionDate = date,
             };
             userbooks.Create(userbookdetail);
             return userbookdetail;
         }
 
-        public UserBookDetail Update(int id,int fine) 
+        public UserBookDetail Update(int id,int fine, int userid) 
         {
-            var result = context.UserBookDetails.ToList().Where(m => m.BookId == id).FirstOrDefault();
+            var result = context.UserBookDetails.ToList().Where(m => m.BookId == id && m.UserId == userid && (m.Is_Submitted == false || m.Is_Submitted == null)).FirstOrDefault();
             result.SubmittedOn = DateTime.Now;
             result.Is_Submitted = true;
             result.Fine = fine;

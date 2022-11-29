@@ -16,12 +16,12 @@
     <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="AuthorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RackNo" Type="Int32" Nullable="false" />
-    <Property Name="C_Language" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CategoryId" Type="Int32" />
     <Property Name="Rating" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Bookcategory" Relationship="Self.FK__BookDetai__Categ__2B3F6F97" FromRole="BookDetails" ToRole="Bookcategory" />
     <NavigationProperty Name="UserBookDetails" Relationship="Self.FK__UserBookD__BookI__2E1BDC42" FromRole="BookDetails" ToRole="UserBookDetails" />
     <Property Name="Quantity" Type="Int32" />
+    <Property Name="BookLanguage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -74,15 +74,15 @@
     </Key>
     <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="C_Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ContactNo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="C_Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Age" Type="Int32" Nullable="false" />
     <Property Name="RoleID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleID__267ABA7A" FromRole="Users" ToRole="Roles" />
     <NavigationProperty Name="Subscriptions" Relationship="Self.FK__Subscript__UserI__30F848ED" FromRole="Users" ToRole="Subscription" />
     <NavigationProperty Name="UserBookDetails" Relationship="Self.FK__UserBookD__UserI__2D27B809" FromRole="Users" ToRole="UserBookDetails" />
+    <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__BookDetai__Categ__2B3F6F97">
     <End Role="Bookcategory" Type="Self.Bookcategory" Multiplicity="0..1" />
@@ -172,5 +172,11 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="UserBookDetails" EntitySet="UserBookDetails" />
     </AssociationSet>
+    <FunctionImport Name="sp_getAllSubscribedUser" ReturnType="Collection(eLibraryModel.sp_getAllSubscribedUser_Result)" />
   </EntityContainer>
+  <ComplexType Name="sp_getAllSubscribedUser_Result">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" />
+  </ComplexType>
 </Schema>

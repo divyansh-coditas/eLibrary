@@ -24,10 +24,10 @@ namespace eLibrary
         public string BookName { get; set; }
         public string AuthorName { get; set; }
         public int RackNo { get; set; }
-        public string C_Language { get; set; }
         public Nullable<int> CategoryId { get; set; }
         public string Rating { get; set; }
         public Nullable<int> Quantity { get; set; }
+        public string BookLanguage { get; set; }
     
         public virtual Bookcategory Bookcategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

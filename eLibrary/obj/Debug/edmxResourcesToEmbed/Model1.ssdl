@@ -15,7 +15,7 @@
     <Property Name="BookName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="AuthorName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RackNo" Type="int" Nullable="false" />
-    <Property Name="_Language" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookLanguage" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CategoryId" Type="int" />
     <Property Name="Rating" Type="varchar" MaxLength="50" />
     <Property Name="Quantity" Type="int" />
@@ -67,9 +67,9 @@
     </Key>
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="_Password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserPassword" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="ContactNo" Type="varchar" MaxLength="150" Nullable="false" />
-    <Property Name="_Address" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="UserAddress" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="Occupation" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Age" Type="int" Nullable="false" />
     <Property Name="RoleID" Type="int" Nullable="false" />
@@ -134,6 +134,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_getAllSubscribedUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="eLibraryModelStoreContainer">
     <EntitySet Name="Bookcategory" EntityType="Self.Bookcategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BookDetails" EntityType="Self.BookDetails" Schema="dbo" store:Type="Tables" />

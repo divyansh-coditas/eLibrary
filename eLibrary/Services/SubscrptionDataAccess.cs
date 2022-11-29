@@ -24,5 +24,11 @@ namespace eLibrary.Services
             return result;
             
         }
+
+        public IEnumerable<sp_getAllSubscribedUser_Result> GetAllSubscribedUser() 
+        {
+            var result = context.sp_getAllSubscribedUser().ToList();
+            return result;
+        }
     }
 }

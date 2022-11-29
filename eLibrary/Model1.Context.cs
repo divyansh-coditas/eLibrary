@@ -12,6 +12,8 @@ namespace eLibrary
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class eLibraryEntities : DbContext
     {
@@ -32,5 +34,10 @@ namespace eLibrary
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserBookDetail> UserBookDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
+    
+        public virtual ObjectResult<sp_getAllSubscribedUser_Result> sp_getAllSubscribedUser()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getAllSubscribedUser_Result>("sp_getAllSubscribedUser");
+        }
     }
 }

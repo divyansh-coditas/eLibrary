@@ -12,52 +12,64 @@
 </style>
 <br>
 <br>
-<div class="table-bordered" style="padding:10px; border-radius:10px">
+@if (User.IsInRole("User"))
+{
+    <div class="table-bordered" style="padding:10px; border-radius:10px; border: 2px solid; border-color:black">
 
-    @using (@Html.BeginForm("GetBooks", "Category"))
-    {
-        <table>
-            <tr>
-                <td>Enter CategoryName</td>
-                <td><input type="text" name="CategoryName"></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Search" class="btn" /></td>
-            </tr>
-        </table>
-    }
-</div>
-<br>
-    @*<p>
-            @Html.ActionLink("Create New", "Create")
-        </p>*@
-    <table class="table table-bordered table-striped" style="border: 1px solid black">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </th>
-            
-        </tr>
-
-        @foreach (var item in Model)
+        @using (@Html.BeginForm("GetBooks", "Category"))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryName)
-                </td>
-                @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
-                    </td>*@
-            </tr>
+            <table>
+                <tr>
+                    <td>Enter CategoryName</td>
+                    <td><input type="text" name="CategoryName"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Search" class="btn" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Create New", "Create",new { }, htmlAttributes: new { @class = "buttonAb"})
+    </p>
+}
+<br>
+<table class="table table-bordered table-striped" style="border-radius: 15px; border: 2px solid; border-color: black;">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        @if (User.IsInRole("Admin")) 
+        {
+            <th></th>
         }
 
-    </table>
-    @*@Html.ActionLink("GetAllBooks", "GetBooks", "Book")
-        @Html.ActionLink("Subscribe", "Create", "Subscription");*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            @if (User.IsInRole("Admin")) { 
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }, htmlAttributes: new { @class = "buttonAb" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId }, htmlAttributes: new { @class = "buttonAb" })
+
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+
