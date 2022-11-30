@@ -38,9 +38,6 @@ else
 <br>
 <table class="table table-bordered table-striped" style="border-radius: 10px; border: 2px solid; border-color:black">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.BookId)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.BookName)
         </th>
@@ -53,9 +50,6 @@ else
         <th>
             @Html.DisplayNameFor(model => model.BookLanguage)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Rating)
         </th>
@@ -70,9 +64,6 @@ else
     @foreach (var item in Model)
     {
         <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.BookId)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.BookName)
             </td>
@@ -85,9 +76,6 @@ else
             <td>
                 @Html.DisplayFor(modelItem => item.BookLanguage)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>
@@ -110,4 +98,21 @@ else
     }
 
 </table>
-
+<center>
+    @if (User.IsInRole("User"))
+    {
+        using (@Html.BeginForm("GetBooks", "Book"))
+        {
+            <input type="submit" name="previous" value="Previous" />
+            <input type="submit" name="next" value="Next" />
+        }
+    }
+    else
+    {
+        using (@Html.BeginForm("Get", "Book"))
+        {
+            <input type="submit" name="previous" value="Previous" />
+            <input type="submit" name="next" value="Next" />
+        }
+    }
+</center>

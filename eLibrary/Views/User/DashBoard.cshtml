@@ -1,0 +1,59 @@
+﻿@model eLibrary.User
+@{
+    ViewBag.Title = "DashBoard";
+}
+
+<br><br><br>
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+        background-size: cover;
+    }
+    th, tr {
+        text-align: left;
+        font-size:18px;
+    }
+    
+</style>
+<center>
+    <div class="jumbotron" style="width: 500px; height: 440px; background-color: #CBDCCB; padding: 4px 4px 4px 4px ">
+        <h2 class="display-4">Hello @User.Identity.Name</h2><br><hr><br>
+        <table>
+            <thead>
+                <tr>
+                    <th><label>UserId:</label></th>
+                    <th><label>@Model.UserId</label></th>
+                </tr>
+                <tr>
+                    <th><label>Name:</label></th>
+                    <th><label>@Model.UserName</label></th>
+                </tr>
+                <tr>
+                    <th><label>Age:</label></th>
+                    <th><label>@Model.Age</label></th>
+                </tr>
+                <tr>
+                    <th><label>Address:</label></th>
+                    <th><label>@Model.UserAddress</label></th>
+                </tr>
+                <tr>
+                    <th><label>ContactNo:</label></th>
+                    <th><label>@Model.ContactNo</label></th>
+                </tr>
+                <tr>
+                    <th><label>Occupation:</label></th>
+                    <th><label>@Model.Occupation</label></th>
+                </tr>
+            </thead>
+        </table><br><br><br>
+        <div>
+            
+        @Html.ActionLink("MySubscription", "Create", "Subscription", new { }, htmlAttributes: new { @class = "buttonAb" })
+        
+                @Html.ActionLink("MyBooks", "GetById", "UserBook", new { }, htmlAttributes: new { @class = "buttonAb" })
+    
+        </div>
+    </div> 
+</center>
+
+

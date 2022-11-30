@@ -10,23 +10,13 @@
 namespace eLibrary
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class UserBookDetail
+    public partial class sp_getAllUsersWithBooks_Result
     {
-        public int UserId { get; set; }
-        public int BookId { get; set; }
+        public string UserNAme { get; set; }
+        public string BookName { get; set; }
         public System.DateTime IssueDate { get; set; }
         public System.DateTime SubmissionDate { get; set; }
         public Nullable<System.DateTime> SubmittedOn { get; set; }
-        public Nullable<int> Fine { get; set; }
-        public Nullable<bool> Is_Submitted { get; set; }
-        public Nullable<bool> Is_Paid { get; set; }
-        public int DetailId { get; set; }
-        public string Bookname { get; set; }
-        public Nullable<bool> Is_Approved { get; set; }
-    
-        public virtual BookDetail BookDetail { get; set; }
-        public virtual User User { get; set; }
     }
 }

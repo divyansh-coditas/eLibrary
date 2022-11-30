@@ -14,13 +14,13 @@
 <br>
 @if (User.IsInRole("User"))
 {
-    <div class="table-bordered" style="padding:10px; border-radius:10px; border: 2px solid; border-color:black">
+    <div class="table-bordered tables" style="padding:10px;">
 
         @using (@Html.BeginForm("GetBooks", "Category"))
         {
             <table>
                 <tr>
-                    <td>Enter CategoryName</td>
+                    <td>CategoryName</td>
                     <td><input type="text" name="CategoryName"></td>
                 </tr>
                 <tr>
@@ -37,7 +37,7 @@ else
     </p>
 }
 <br>
-<table class="table table-bordered table-striped" style="border-radius: 15px; border: 2px solid; border-color: black;">
+<table class="table table-bordered table-striped tables">
     <tr>
         @*<th>
             @Html.DisplayNameFor(model => model.CategoryId)
@@ -45,10 +45,7 @@ else
         <th>
             @Html.DisplayNameFor(model => model.CategoryName)
         </th>
-        @if (User.IsInRole("Admin")) 
-        {
-            <th></th>
-        }
+        <th></th>
 
     </tr>
 
@@ -56,16 +53,23 @@ else
     {
         <tr>
             @*<td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>*@
+            @Html.DisplayFor(modelItem => item.CategoryId)
+        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
-            @if (User.IsInRole("Admin")) { 
+            @if (User.IsInRole("Admin"))
+            {
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }, htmlAttributes: new { @class = "buttonAb" })
                     @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId }, htmlAttributes: new { @class = "buttonAb" })
 
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.ActionLink("GetBooks", "GetBooks", "Category", new { CategoryName = item.CategoryName }, htmlAttributes: new { @class = "buttonAb" })
                 </td>
             }
         </tr>

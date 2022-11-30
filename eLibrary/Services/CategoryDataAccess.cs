@@ -26,11 +26,6 @@ namespace eLibrary.Services
         public Bookcategory Update(int id, Bookcategory bookcategory)
         {
             var category = context.Bookcategories.Find(id);
-            if (category == null)
-            {
-                throw new Exception("Record to be updated is not found");
-            }
-
             category.CategoryName = bookcategory.CategoryName;
             context.SaveChanges();
             return category;
@@ -39,14 +34,15 @@ namespace eLibrary.Services
 
         public bool Delete(int id) 
         {
-            var category = context.Bookcategories.Find(id);
-            if (category == null) 
-            {
-                throw new Exception("Record to be deleted is not found");
-            }
-            context.Bookcategories.Remove(category);
-            context.SaveChanges();
-            return true;
+            
+                var category = context.Bookcategories.Find(id);
+                if (category == null)
+                {
+                    throw new Exception("Record to be deleted is not found");
+                }
+                context.Bookcategories.Remove(category);
+                context.SaveChanges();
+                return true;           
         }
 
     }

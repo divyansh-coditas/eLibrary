@@ -65,6 +65,7 @@
           <Property Name="Is_Paid" Type="bit" />
           <Property Name="DetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Bookname" Type="varchar" MaxLength="50" />
+          <Property Name="Is_Approved" Type="bit" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -140,6 +141,7 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="sp_getAllSubscribedUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllUsersBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="eLibraryModelStoreContainer">
           <EntitySet Name="Bookcategory" EntityType="Self.Bookcategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookDetails" EntityType="Self.BookDetails" Schema="dbo" store:Type="Tables" />
@@ -240,6 +242,7 @@
           <NavigationProperty Name="BookDetail" Relationship="Self.FK__UserBookD__BookI__2E1BDC42" FromRole="UserBookDetails" ToRole="BookDetails" />
           <NavigationProperty Name="User" Relationship="Self.FK__UserBookD__UserI__2D27B809" FromRole="UserBookDetails" ToRole="Users" />
           <Property Name="Bookname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Approved" Type="Boolean" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -346,11 +349,28 @@
             <End Role="UserBookDetails" EntitySet="UserBookDetails" />
           </AssociationSet>
           <FunctionImport Name="sp_getAllSubscribedUser" ReturnType="Collection(eLibraryModel.sp_getAllSubscribedUser_Result)" />
+          <FunctionImport Name="sp_getAllUsersWithBooks" ReturnType="Collection(eLibraryModel.sp_getAllUsersWithBooks_Result)" />
+          <FunctionImport Name="sp_GetAllUsersBooks" ReturnType="Collection(eLibraryModel.sp_GetAllUsersBooks_Result)" />
         </EntityContainer>
         <ComplexType Name="sp_getAllSubscribedUser_Result">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
           <Property Type="DateTime" Name="StartDate" Nullable="false" />
           <Property Type="DateTime" Name="EndDate" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_getAllUsersWithBooks_Result">
+          <Property Type="String" Name="UserNAme" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="BookName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="IssueDate" Nullable="false" />
+          <Property Type="DateTime" Name="SubmissionDate" Nullable="false" />
+          <Property Type="DateTime" Name="SubmittedOn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllUsersBooks_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="BookName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="IssueDate" Nullable="false" />
+          <Property Type="DateTime" Name="SubmissionDate" Nullable="false" />
+          <Property Type="DateTime" Name="SubmittedOn" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -412,6 +432,7 @@
           <EntitySetMapping Name="UserBookDetails">
             <EntityTypeMapping TypeName="eLibraryModel.UserBookDetail">
               <MappingFragment StoreEntitySet="UserBookDetails">
+                <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
                 <ScalarProperty Name="Bookname" ColumnName="Bookname" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="BookId" ColumnName="BookId" />
@@ -445,6 +466,18 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllUsersBooks" FunctionName="eLibraryModel.Store.sp_GetAllUsersBooks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eLibraryModel.sp_GetAllUsersBooks_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

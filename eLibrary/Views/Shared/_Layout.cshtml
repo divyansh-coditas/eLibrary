@@ -31,15 +31,17 @@
                             <li>@Html.ActionLink("Books", "GetBooks", "Book")</li>
                             <li>@Html.ActionLink("Subscribe", "Create", "Subscription")</li>
                             <li>@Html.ActionLink("MyBooks", "GetById", "Userbook")</li>
-                            <li><a>Dear - @User.Identity.Name</a></li>
+
+                            <li>@Html.ActionLink(User.Identity.Name, "DashBoard", "User")</li>
                             <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+
                         }
                         else
                         {
                             <li>@Html.ActionLink("Cateories", "Get", "Category")</li>
-                            <li>@Html.ActionLink("Books", "GetBooks", "Book")</li>
+                            <li>@Html.ActionLink("Books", "Get", "Book")</li>
                             <li>@Html.ActionLink("GetAllSubscribedUser", "GetAllSubscribedUser", "Subscription")</li>
-                            <li><a>Dear - @User.Identity.Name</a></li>
+                            <li>@Html.ActionLink("GetAllUsersHavingBooks", "GetAllUsersWithBooks", "Userbook")</li>
                             <li>@Html.ActionLink("Logout", "Logout", "User")</li>
                         }
 

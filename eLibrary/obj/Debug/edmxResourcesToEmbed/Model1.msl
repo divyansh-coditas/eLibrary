@@ -55,6 +55,7 @@
     <EntitySetMapping Name="UserBookDetails">
       <EntityTypeMapping TypeName="eLibraryModel.UserBookDetail">
         <MappingFragment StoreEntitySet="UserBookDetails">
+          <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
           <ScalarProperty Name="Bookname" ColumnName="Bookname" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="BookId" ColumnName="BookId" />
@@ -88,6 +89,18 @@
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetAllUsersBooks" FunctionName="eLibraryModel.Store.sp_GetAllUsersBooks">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eLibraryModel.sp_GetAllUsersBooks_Result">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="BookName" ColumnName="BookName" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+          <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+          <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

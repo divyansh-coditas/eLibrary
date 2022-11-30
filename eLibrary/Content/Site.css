@@ -81,4 +81,11 @@ td, th {
     text-align: center;
 }
 
+.tables {
+    border-color:black;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+
 

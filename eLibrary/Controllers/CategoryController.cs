@@ -56,7 +56,7 @@ namespace eLibrary.Controllers
             return RedirectToAction("Get");
         }
 
-        [HttpPost]
+        
         public ActionResult GetBooks(string CategoryName)
         {
             //string bookname = book.CategoryName;

@@ -9,6 +9,8 @@ namespace eLibrary.Services
     public class UserBookDataAccess
     {
         eLibraryEntities context = new eLibraryEntities();
+        BookDataAccess bookdata = new BookDataAccess();       
+        SubscrptionDataAccess subscribe = new SubscrptionDataAccess();
         public IEnumerable<UserBookDetail> Get() 
         {
             var result = context.UserBookDetails.ToList(); 
@@ -24,10 +26,6 @@ namespace eLibrary.Services
 
         public UserBookDetail Access(int bookid, int userid) 
         {
-            BookDataAccess bookdata = new BookDataAccess();
-            UserBookDataAccess userbooks = new UserBookDataAccess();
-            UserDataAccess users = new UserDataAccess();
-            SubscrptionDataAccess subscribe = new SubscrptionDataAccess();
             DateTime date;
             var bookDetail = bookdata.Get(bookid);
             bookdata.Update(bookid);
@@ -48,7 +46,7 @@ namespace eLibrary.Services
                 IssueDate = DateTime.Now,
                 SubmissionDate = date,
             };
-            userbooks.Create(userbookdetail);
+            Create(userbookdetail);
             return userbookdetail;
         }
 
@@ -60,6 +58,12 @@ namespace eLibrary.Services
             result.Fine = fine;
             result.Is_Paid = true;
             context.SaveChanges();
+            return result;
+        }
+
+        public IEnumerable<sp_GetAllUsersBooks_Result> GetAllUsersHavingBooks() 
+        {
+            var result = context.sp_GetAllUsersBooks().ToList().Where(m => m.SubmittedOn == null);
             return result;
         }
     }

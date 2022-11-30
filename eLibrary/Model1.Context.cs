@@ -39,5 +39,15 @@ namespace eLibrary
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getAllSubscribedUser_Result>("sp_getAllSubscribedUser");
         }
+    
+        public virtual ObjectResult<sp_getAllUsersWithBooks_Result> sp_getAllUsersWithBooks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getAllUsersWithBooks_Result>("sp_getAllUsersWithBooks");
+        }
+    
+        public virtual ObjectResult<sp_GetAllUsersBooks_Result> sp_GetAllUsersBooks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAllUsersBooks_Result>("sp_GetAllUsersBooks");
+        }
     }
 }

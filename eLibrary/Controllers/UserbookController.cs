@@ -30,10 +30,9 @@ namespace eLibrary.Controllers
         }
 
         public ActionResult GetById() 
-        {
-            UserBookDataAccess userbook = new UserBookDataAccess();
+        { 
             int Userid = Convert.ToInt32(Session["Id"]);
-            var result = userbook.Get().Where(m => m.UserId == Userid && (m.Is_Paid == false || m.Is_Paid == null));
+            var result = userbooks.Get().Where(m => m.UserId == Userid && m.Is_Paid == null && m.Is_Approved == true);
             return View(result);
         }
 
@@ -62,10 +61,20 @@ namespace eLibrary.Controllers
             return RedirectToAction("GetBooks","Book");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult GetAllUsersWithBooks() 
         {
-            var result = userbooks.Get();
+            var result = userbooks.GetAllUsersHavingBooks();
             return View(result);
+        }
+
+        [Authorize(Roles = "Admin")]
+
+        public ActionResult NotApprovedBooks() 
+        {
+            int Userid = Convert.ToInt32(Session["Id"]);
+            var result = userbooks.Get().Where(m => m.UserId == Userid && m.Is_Paid == null && m.Is_Approved == null);
+            return View();
         }
 
     }

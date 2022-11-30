@@ -67,6 +67,7 @@
     <NavigationProperty Name="BookDetail" Relationship="Self.FK__UserBookD__BookI__2E1BDC42" FromRole="UserBookDetails" ToRole="BookDetails" />
     <NavigationProperty Name="User" Relationship="Self.FK__UserBookD__UserI__2D27B809" FromRole="UserBookDetails" ToRole="Users" />
     <Property Name="Bookname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Approved" Type="Boolean" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -173,10 +174,27 @@
       <End Role="UserBookDetails" EntitySet="UserBookDetails" />
     </AssociationSet>
     <FunctionImport Name="sp_getAllSubscribedUser" ReturnType="Collection(eLibraryModel.sp_getAllSubscribedUser_Result)" />
+    <FunctionImport Name="sp_getAllUsersWithBooks" ReturnType="Collection(eLibraryModel.sp_getAllUsersWithBooks_Result)" />
+    <FunctionImport Name="sp_GetAllUsersBooks" ReturnType="Collection(eLibraryModel.sp_GetAllUsersBooks_Result)" />
   </EntityContainer>
   <ComplexType Name="sp_getAllSubscribedUser_Result">
     <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
     <Property Type="DateTime" Name="StartDate" Nullable="false" />
     <Property Type="DateTime" Name="EndDate" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_getAllUsersWithBooks_Result">
+    <Property Type="String" Name="UserNAme" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="BookName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="IssueDate" Nullable="false" />
+    <Property Type="DateTime" Name="SubmissionDate" Nullable="false" />
+    <Property Type="DateTime" Name="SubmittedOn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetAllUsersBooks_Result">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="BookName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="IssueDate" Nullable="false" />
+    <Property Type="DateTime" Name="SubmissionDate" Nullable="false" />
+    <Property Type="DateTime" Name="SubmittedOn" Nullable="true" />
   </ComplexType>
 </Schema>

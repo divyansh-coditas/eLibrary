@@ -67,13 +67,19 @@ namespace eLibrary.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("GetBooks", "Book");
+                        return RedirectToAction("DashBoard");
                     }
                 }
                 ModelState.AddModelError("", "Invalid username or password");
                 
                 return View();
             }
+        }
+
+        public ActionResult DashBoard() 
+        {
+            var result = userdata.Get().Where(m => m.UserId == Convert.ToInt32(Session["Id"])).FirstOrDefault();
+            return View(result);
         }
 
         public ActionResult LogOut()

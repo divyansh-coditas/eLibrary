@@ -16,9 +16,9 @@
 <br>
 <table class="table table-bordered table-striped">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.BookId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.BookName)
         </th>
@@ -31,21 +31,25 @@
         <th>
             @Html.DisplayNameFor(model => model.BookLanguage)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Rating)
         </th>
-       
+        @if (User.IsInRole("User"))
+        {
+        <th></th>
+        }
+
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.BookId)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.BookName)
             </td>
@@ -58,17 +62,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BookLanguage)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>
-            @*<td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>*@
+            <td>
+                @if(User.IsInRole("User"))
+                {
+                @Html.ActionLink("GetAccess", "GetAccess", "Userbook", new { id = item.BookId }, htmlAttributes: new { @class = "buttonAb" })
+                }
+            </td>
         </tr>
     }
 

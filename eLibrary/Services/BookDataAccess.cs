@@ -45,5 +45,18 @@ namespace eLibrary.Services
             context.SaveChanges();
             return book;
         }
+
+        public BookDetail Edit(int id, BookDetail bookdetail) 
+        {
+            var book = context.BookDetails.Find(id);
+            book.BookName = bookdetail.BookName;
+            book.AuthorName = bookdetail.AuthorName;
+            book.RackNo = bookdetail.RackNo;
+            book.Rating = bookdetail.Rating;
+            book.Quantity = bookdetail.Quantity;
+
+            context.SaveChanges();
+            return book;
+        }
     }
 }

@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "GetById";
 }
+<br><br><br>
 <style>
     body {
         background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
@@ -10,22 +11,9 @@
         background-size: cover;
     }
 </style>
-<br>
-<br>
-<br>
-@*<h2>GetById</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
 <table class="table table-bordered table-striped">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookId)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Bookname)
         </th>
@@ -41,12 +29,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookId)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Bookname)
             </td>
@@ -57,7 +39,7 @@
                 @item.SubmissionDate.ToShortDateString()
             </td>
             <td>
-                @Html.ActionLink("Submit", "Submit", new { id = item.BookId }, htmlAttributes: new { @class = "buttonAb" }) 
+                @Html.ActionLink("Submit", "Submit", new { id = item.BookId }, htmlAttributes: new { @class = "buttonAb" })
             </td>
         </tr>
     }
