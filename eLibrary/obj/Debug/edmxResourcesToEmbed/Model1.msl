@@ -52,23 +52,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserBookDetails">
-      <EntityTypeMapping TypeName="eLibraryModel.UserBookDetail">
-        <MappingFragment StoreEntitySet="UserBookDetails">
-          <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
-          <ScalarProperty Name="Bookname" ColumnName="Bookname" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="BookId" ColumnName="BookId" />
-          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
-          <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
-          <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
-          <ScalarProperty Name="Fine" ColumnName="Fine" />
-          <ScalarProperty Name="Is_Submitted" ColumnName="Is_Submitted" />
-          <ScalarProperty Name="Is_Paid" ColumnName="Is_Paid" />
-          <ScalarProperty Name="DetailId" ColumnName="DetailId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="eLibraryModel.User">
         <MappingFragment StoreEntitySet="Users">
@@ -101,6 +84,33 @@
           <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
           <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
           <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="UserBookDetails">
+      <EntityTypeMapping TypeName="eLibraryModel.UserBookDetail">
+        <MappingFragment StoreEntitySet="UserBookDetails">
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+          <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+          <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
+          <ScalarProperty Name="Bookname" ColumnName="Bookname" />
+          <ScalarProperty Name="DetailId" ColumnName="DetailId" />
+          <ScalarProperty Name="Is_Paid" ColumnName="Is_Paid" />
+          <ScalarProperty Name="Is_Submitted" ColumnName="Is_Submitted" />
+          <ScalarProperty Name="Fine" ColumnName="Fine" />
+          <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetNotApprovedUserBooks" FunctionName="eLibraryModel.Store.sp_GetNotApprovedUserBooks">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eLibraryModel.sp_GetNotApprovedUserBooks_Result">
+          <ScalarProperty Name="DetailId" ColumnName="DetailId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="BookName" ColumnName="BookName" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

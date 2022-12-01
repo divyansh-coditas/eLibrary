@@ -40,6 +40,7 @@ textarea {
     border: 1px solid;
     border-radius: 4px;
     /*margin-left:130px;*/
+    opacity: 0.7
 }
 
 .login {
@@ -85,6 +86,20 @@ td, th {
     border-color:black;
     border: 2px solid;
     border-radius: 10px;
+    background-color:mintcream;
+    
+}
+th {
+    background-color: rosybrown;
+    color: white;
+    height: 50px;
+}
+
+
+
+.bgimage {
+    background-image:src('../img/background-image.png');
+    
 }
 
 

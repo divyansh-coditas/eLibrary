@@ -8,23 +8,23 @@
         background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
         background-size: cover;
     }
+   
 </style>
 
 <br>
 <br>
 @if (User.IsInRole("User")) { 
-    <div class="table table-bordered table-striped" style="padding:5px; border: 2px solid; border-color:black; border-radius: 10px">
+    <div class="table table-bordered" style="padding:5px; border: 2px solid; border-color:black; border-radius: 10px">
         @using (Html.BeginForm("GetBookByName", "Book"))
         {
-            <table>
+            <table style="text-align:center">
                 <tr>
-                    <td>Enter Name:
-                    <td>
-                    <td><input type="text" name="BookName"></td>
+                    <td>Enter Name:<td>
+                    <td><input type="text" name="BookName" required></td>              
+                    <td><input type="submit" value="Search" class="btn" style="margin-left:10px"></td>
                 </tr>
-                <tr>
-                    <td><input type="submit" value="Search" class="btn"></td>
-                </tr>
+                
+
             </table>
         }
     </div>
@@ -36,7 +36,7 @@ else
     </p>
 }
 <br>
-<table class="table table-bordered table-striped" style="border-radius: 10px; border: 2px solid; border-color:black">
+<table class="table table-bordered" style="border-radius: 10px; border: 2px solid; border-color:black; background-color: mintcream">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookName)
@@ -99,20 +99,11 @@ else
 
 </table>
 <center>
-    @if (User.IsInRole("User"))
-    {
-        using (@Html.BeginForm("GetBooks", "Book"))
-        {
-            <input type="submit" name="previous" value="Previous" />
-            <input type="submit" name="next" value="Next" />
-        }
-    }
-    else
-    {
-        using (@Html.BeginForm("Get", "Book"))
-        {
-            <input type="submit" name="previous" value="Previous" />
-            <input type="submit" name="next" value="Next" />
-        }
-    }
+      @using(@Html.BeginForm("GetBooks", "Book"))
+       {
+           <input type="submit" name="previous" value="Previous" />
+           <input type="submit" name="next" value="Next" />
+       }
+    
+    
 </center>

@@ -19,9 +19,9 @@
     <Property Name="CategoryId" Type="Int32" />
     <Property Name="Rating" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Bookcategory" Relationship="Self.FK__BookDetai__Categ__2B3F6F97" FromRole="BookDetails" ToRole="Bookcategory" />
-    <NavigationProperty Name="UserBookDetails" Relationship="Self.FK__UserBookD__BookI__2E1BDC42" FromRole="BookDetails" ToRole="UserBookDetails" />
     <Property Name="Quantity" Type="Int32" />
     <Property Name="BookLanguage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserBookDetails" Relationship="eLibraryModel.FK__UserBookD__BookI__2E1BDC42" FromRole="BookDetail" ToRole="UserBookDetail" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -51,24 +51,6 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityType Name="UserBookDetail">
-    <Key>
-      <PropertyRef Name="DetailId" />
-    </Key>
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="BookId" Type="Int32" Nullable="false" />
-    <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="SubmissionDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="SubmittedOn" Type="DateTime" Precision="0" />
-    <Property Name="Fine" Type="Int32" />
-    <Property Name="Is_Submitted" Type="Boolean" />
-    <Property Name="Is_Paid" Type="Boolean" />
-    <Property Name="DetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="BookDetail" Relationship="Self.FK__UserBookD__BookI__2E1BDC42" FromRole="UserBookDetails" ToRole="BookDetails" />
-    <NavigationProperty Name="User" Relationship="Self.FK__UserBookD__UserI__2D27B809" FromRole="UserBookDetails" ToRole="Users" />
-    <Property Name="Bookname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Is_Approved" Type="Boolean" />
-  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserId" />
@@ -81,9 +63,9 @@
     <Property Name="RoleID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleID__267ABA7A" FromRole="Users" ToRole="Roles" />
     <NavigationProperty Name="Subscriptions" Relationship="Self.FK__Subscript__UserI__30F848ED" FromRole="Users" ToRole="Subscription" />
-    <NavigationProperty Name="UserBookDetails" Relationship="Self.FK__UserBookD__UserI__2D27B809" FromRole="Users" ToRole="UserBookDetails" />
     <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="UserAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserBookDetails" Relationship="eLibraryModel.FK__UserBookD__UserI__2D27B809" FromRole="User" ToRole="UserBookDetail" />
   </EntityType>
   <Association Name="FK__BookDetai__Categ__2B3F6F97">
     <End Role="Bookcategory" Type="Self.Bookcategory" Multiplicity="0..1" />
@@ -94,18 +76,6 @@
       </Principal>
       <Dependent Role="BookDetails">
         <PropertyRef Name="CategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__UserBookD__BookI__2E1BDC42">
-    <End Role="BookDetails" Type="Self.BookDetail" Multiplicity="1" />
-    <End Role="UserBookDetails" Type="Self.UserBookDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BookDetails">
-        <PropertyRef Name="BookId" />
-      </Principal>
-      <Dependent Role="UserBookDetails">
-        <PropertyRef Name="BookId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -133,33 +103,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserBookD__UserI__2D27B809">
-    <End Role="Users" Type="Self.User" Multiplicity="1" />
-    <End Role="UserBookDetails" Type="Self.UserBookDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="UserBookDetails">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="eLibraryEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Bookcategories" EntityType="Self.Bookcategory" />
     <EntitySet Name="BookDetails" EntityType="Self.BookDetail" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="Subscriptions" EntityType="Self.Subscription" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-    <EntitySet Name="UserBookDetails" EntityType="Self.UserBookDetail" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <AssociationSet Name="FK__BookDetai__Categ__2B3F6F97" Association="Self.FK__BookDetai__Categ__2B3F6F97">
       <End Role="Bookcategory" EntitySet="Bookcategories" />
       <End Role="BookDetails" EntitySet="BookDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK__UserBookD__BookI__2E1BDC42" Association="Self.FK__UserBookD__BookI__2E1BDC42">
-      <End Role="BookDetails" EntitySet="BookDetails" />
-      <End Role="UserBookDetails" EntitySet="UserBookDetails" />
     </AssociationSet>
     <AssociationSet Name="FK__Users__RoleID__267ABA7A" Association="Self.FK__Users__RoleID__267ABA7A">
       <End Role="Roles" EntitySet="Roles" />
@@ -169,13 +122,20 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Subscription" EntitySet="Subscriptions" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserBookD__UserI__2D27B809" Association="Self.FK__UserBookD__UserI__2D27B809">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="UserBookDetails" EntitySet="UserBookDetails" />
-    </AssociationSet>
     <FunctionImport Name="sp_getAllSubscribedUser" ReturnType="Collection(eLibraryModel.sp_getAllSubscribedUser_Result)" />
     <FunctionImport Name="sp_getAllUsersWithBooks" ReturnType="Collection(eLibraryModel.sp_getAllUsersWithBooks_Result)" />
     <FunctionImport Name="sp_GetAllUsersBooks" ReturnType="Collection(eLibraryModel.sp_GetAllUsersBooks_Result)" />
+    <EntitySet Name="UserBookDetails" EntityType="eLibraryModel.UserBookDetail" />
+    <AssociationSet Name="FK__UserBookD__BookI__2E1BDC42" Association="eLibraryModel.FK__UserBookD__BookI__2E1BDC42">
+      <End Role="BookDetail" EntitySet="BookDetails" />
+      <End Role="UserBookDetail" EntitySet="UserBookDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserBookD__UserI__2D27B809" Association="eLibraryModel.FK__UserBookD__UserI__2D27B809">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserBookDetail" EntitySet="UserBookDetails" />
+    </AssociationSet>
+    <FunctionImport Name="sp_GetNotApprovedBooks" ReturnType="Collection(eLibraryModel.sp_GetNotApprovedBooks_Result)" />
+    <FunctionImport Name="sp_GetNotApprovedUserBooks" ReturnType="Collection(eLibraryModel.sp_GetNotApprovedUserBooks_Result)" />
   </EntityContainer>
   <ComplexType Name="sp_getAllSubscribedUser_Result">
     <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
@@ -196,5 +156,58 @@
     <Property Type="DateTime" Name="IssueDate" Nullable="false" />
     <Property Type="DateTime" Name="SubmissionDate" Nullable="false" />
     <Property Type="DateTime" Name="SubmittedOn" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="UserBookDetail">
+    <Key>
+      <PropertyRef Name="DetailId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="BookId" Type="Int32" Nullable="false" />
+    <Property Name="SubmittedOn" Type="DateTime" Precision="0" />
+    <Property Name="Fine" Type="Int32" />
+    <Property Name="Is_Submitted" Type="Boolean" />
+    <Property Name="Is_Paid" Type="Boolean" />
+    <Property Name="DetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bookname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Approved" Type="Boolean" />
+    <Property Name="SubmissionDate" Type="DateTime" Precision="0" />
+    <Property Name="IssueDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="BookDetail" Relationship="eLibraryModel.FK__UserBookD__BookI__2E1BDC42" FromRole="UserBookDetail" ToRole="BookDetail" />
+    <NavigationProperty Name="User" Relationship="eLibraryModel.FK__UserBookD__UserI__2D27B809" FromRole="UserBookDetail" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__UserBookD__BookI__2E1BDC42">
+    <End Type="eLibraryModel.BookDetail" Role="BookDetail" Multiplicity="1" />
+    <End Type="eLibraryModel.UserBookDetail" Role="UserBookDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookDetail">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="UserBookDetail">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserBookD__UserI__2D27B809">
+    <End Type="eLibraryModel.User" Role="User" Multiplicity="1" />
+    <End Type="eLibraryModel.UserBookDetail" Role="UserBookDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserBookDetail">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_GetNotApprovedBooks_Result">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="BookName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="IssueDate" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetNotApprovedUserBooks_Result">
+    <Property Type="Int32" Name="DetailId" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="BookName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="IssueDate" Nullable="true" />
   </ComplexType>
 </Schema>

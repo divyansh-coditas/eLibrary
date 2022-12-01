@@ -52,8 +52,6 @@
     </Key>
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="BookId" Type="int" Nullable="false" />
-    <Property Name="IssueDate" Type="date" Nullable="false" />
-    <Property Name="SubmissionDate" Type="date" Nullable="false" />
     <Property Name="SubmittedOn" Type="date" />
     <Property Name="Fine" Type="int" />
     <Property Name="Is_Submitted" Type="bit" />
@@ -61,6 +59,8 @@
     <Property Name="DetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Bookname" Type="varchar" MaxLength="50" />
     <Property Name="Is_Approved" Type="bit" />
+    <Property Name="SubmissionDate" Type="date" />
+    <Property Name="IssueDate" Type="date" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -137,6 +137,7 @@
   </Association>
   <Function Name="sp_getAllSubscribedUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetAllUsersBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetNotApprovedUserBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="eLibraryModelStoreContainer">
     <EntitySet Name="Bookcategory" EntityType="Self.Bookcategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BookDetails" EntityType="Self.BookDetails" Schema="dbo" store:Type="Tables" />

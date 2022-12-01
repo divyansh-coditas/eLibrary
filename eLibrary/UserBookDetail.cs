@@ -16,8 +16,6 @@ namespace eLibrary
     {
         public int UserId { get; set; }
         public int BookId { get; set; }
-        public System.DateTime IssueDate { get; set; }
-        public System.DateTime SubmissionDate { get; set; }
         public Nullable<System.DateTime> SubmittedOn { get; set; }
         public Nullable<int> Fine { get; set; }
         public Nullable<bool> Is_Submitted { get; set; }
@@ -25,6 +23,8 @@ namespace eLibrary
         public int DetailId { get; set; }
         public string Bookname { get; set; }
         public Nullable<bool> Is_Approved { get; set; }
+        public Nullable<System.DateTime> SubmissionDate { get; set; }
+        public Nullable<System.DateTime> IssueDate { get; set; }
     
         public virtual BookDetail BookDetail { get; set; }
         public virtual User User { get; set; }

@@ -13,6 +13,7 @@ namespace eLibrary.Controllers
         BookDataAccess bookdata = new BookDataAccess();
         UserBookDataAccess userbooks = new UserBookDataAccess();
         UserDataAccess users = new UserDataAccess();
+        SubscrptionDataAccess subscribeduser = new SubscrptionDataAccess();
         public ActionResult GetAccess(int id)
         {
             var bookdetail = bookdata.Get(id);
@@ -25,7 +26,7 @@ namespace eLibrary.Controllers
             }
             userbooks.Access(id, Userid);
 
-            return RedirectToAction("GetById");
+            return RedirectToAction("GetBooks", "Book");
 
         }
 
@@ -42,8 +43,8 @@ namespace eLibrary.Controllers
             var result = userbooks.Get().Where(m => m.BookId == id && m.UserId == userid && (m.Is_Submitted == false || m.Is_Submitted == null)).FirstOrDefault();
             if (DateTime.Now > result.SubmissionDate)
             {
-                TimeSpan time = DateTime.Now - result.SubmissionDate;
-                int money = Convert.ToInt32(time.TotalDays * 15);
+                TimeSpan? time = DateTime.Now -result.SubmissionDate;
+                int money = Convert.ToInt32(time.Value.TotalDays * 15);
                 if (money > 0 && id != 0 && str == null)
                 {
                     ViewBag.Money = money;
@@ -68,13 +69,47 @@ namespace eLibrary.Controllers
             return View(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        //Only Admin can access this method as admin can only approve Books requested by user.
 
+        [Authorize(Roles = "Admin")]
         public ActionResult NotApprovedBooks() 
         {
-            int Userid = Convert.ToInt32(Session["Id"]);
-            var result = userbooks.Get().Where(m => m.UserId == Userid && m.Is_Paid == null && m.Is_Approved == null);
-            return View();
+            var result = userbooks.GetNotApprovedUserBooks();
+            return View(result);
+        }
+
+        [Authorize(Roles = "Admin")]
+
+        public ActionResult Approve(int detailid) 
+        {
+            DateTime date;
+            var result = userbooks.Get().Where(m => m.DetailId == detailid).FirstOrDefault();
+            var isSubscribedUser = subscribeduser.Get().Any(m => m.UserId == result.UserId);
+            if (isSubscribedUser)
+            {
+                date = DateTime.Now.AddDays(14);
+            }
+            else
+            {
+                date = DateTime.Now.AddDays(7);
+            }
+
+            UserBookDetail userBookDetail = new UserBookDetail()
+            {
+                IssueDate = DateTime.Now,
+                SubmissionDate = date,
+                Is_Approved = true
+            };
+            bookdata.Update(result.BookId);
+            userbooks.UpdateUserBook(detailid, userBookDetail);
+            return RedirectToAction("NotApprovedBooks");
+        }
+
+        [Authorize (Roles = "Admin")]
+        public ActionResult DeleteUserBook(int detailid) 
+        {
+            userbooks.DeleteUserBook(detailid);  
+            return RedirectToAction("NotApprovedBooks");
         }
 
     }

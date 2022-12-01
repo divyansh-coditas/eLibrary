@@ -1,30 +1,29 @@
-﻿@model IEnumerable<eLibrary.sp_getAllSubscribedUser_Result>
+﻿@model IEnumerable<eLibrary.sp_GetNotApprovedUserBooks_Result>
 
 @{
-    ViewBag.Title = "GetAllSubscribedUser";
+    ViewBag.Title = "NotApprovedBooks";
 }
-<br>
-<br>
-<br>
+<br><br><br>
 <style>
     body {
         background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+        background-repeat: no-repeat;
         background-size: cover;
     }
-   
 </style>
 
-<table class="table table-bordered tables" style="border-radius: 10px; border: 2px solid; border-color:black">
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.BookName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.DisplayNameFor(model => model.IssueDate)
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -34,10 +33,14 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @item.StartDate.ToShortDateString()
+                @Html.DisplayFor(modelItem => item.BookName)
             </td>
             <td>
-                @item.EndDate.ToShortDateString()
+                @Html.DisplayFor(modelItem => item.IssueDate)
+            </td>
+            <td>
+                @Html.ActionLink("Approve", "Approve", new { detailid = item.DetailId }) |
+                @Html.ActionLink("Delete", "DeleteUserBook", new { detailid = item.DetailId })
             </td>
         </tr>
     }

@@ -32,8 +32,8 @@ namespace eLibrary
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Subscription> Subscriptions { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<UserBookDetail> UserBookDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserBookDetail> UserBookDetails { get; set; }
     
         public virtual ObjectResult<sp_getAllSubscribedUser_Result> sp_getAllSubscribedUser()
         {
@@ -48,6 +48,16 @@ namespace eLibrary
         public virtual ObjectResult<sp_GetAllUsersBooks_Result> sp_GetAllUsersBooks()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAllUsersBooks_Result>("sp_GetAllUsersBooks");
+        }
+    
+        public virtual ObjectResult<sp_GetNotApprovedBooks_Result> sp_GetNotApprovedBooks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetNotApprovedBooks_Result>("sp_GetNotApprovedBooks");
+        }
+         
+        public virtual ObjectResult<sp_GetNotApprovedUserBooks_Result> sp_GetNotApprovedUserBooks()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetNotApprovedUserBooks_Result>("sp_GetNotApprovedUserBooks");
         }
     }
 }

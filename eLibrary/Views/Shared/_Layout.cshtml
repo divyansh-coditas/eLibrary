@@ -39,9 +39,10 @@
                         else
                         {
                             <li>@Html.ActionLink("Cateories", "Get", "Category")</li>
-                            <li>@Html.ActionLink("Books", "Get", "Book")</li>
+                            <li>@Html.ActionLink("Books", "GetBooks", "Book")</li>
                             <li>@Html.ActionLink("GetAllSubscribedUser", "GetAllSubscribedUser", "Subscription")</li>
                             <li>@Html.ActionLink("GetAllUsersHavingBooks", "GetAllUsersWithBooks", "Userbook")</li>
+                            <li>@Html.ActionLink("BooksToApprove", "NotApprovedBooks", "Userbook")</li>
                             <li>@Html.ActionLink("Logout", "Logout", "User")</li>
                         }
 
@@ -58,7 +59,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <br><br><br>
         <footer>
             <p>&copy; @DateTime.Now.Year - Library Management System</p>
         </footer>

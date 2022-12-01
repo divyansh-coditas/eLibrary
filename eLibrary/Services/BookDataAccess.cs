@@ -58,5 +58,11 @@ namespace eLibrary.Services
             context.SaveChanges();
             return book;
         }
+
+        public void Create( BookDetail bookdetail) 
+        {
+            context.BookDetails.Add(bookdetail);
+            context.SaveChanges();
+        }
     }
 }

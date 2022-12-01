@@ -6,18 +6,23 @@
 <br><br><br>
 <style>
     body {
-        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
-        background-size: cover;
+        background-image: url('https://cdn.pixabay.com/photo/2018/01/18/20/43/literature-3091212_1280.jpg');
+        background-size: 1400px 700px;
     }
     th, tr {
         text-align: left;
         font-size:18px;
     }
-    
+    th {
+        background-color: grey;
+        color: black;
+    }
 </style>
-<center>
-    <div class="jumbotron" style="width: 500px; height: 440px; background-color: #CBDCCB; padding: 4px 4px 4px 4px ">
-        <h2 class="display-4">Hello @User.Identity.Name</h2><br><hr><br>
+
+    <div class="jumbotron" style="width: 400px; height: 500px; background-color: gray; padding: 4px 4px 4px 4px;border-radius: 20px;text-align:center;opacity: 50% ">
+        <h2 class="display-4">Hello @User.Identity.Name</h2><br>
+        <hr style="color:red">
+        <center>
         <table>
             <thead>
                 <tr>
@@ -45,15 +50,16 @@
                     <th><label>@Model.Occupation</label></th>
                 </tr>
             </thead>
-        </table><br><br><br>
+        </table>
+        </center><br>
         <div>
             
         @Html.ActionLink("MySubscription", "Create", "Subscription", new { }, htmlAttributes: new { @class = "buttonAb" })
         
-                @Html.ActionLink("MyBooks", "GetById", "UserBook", new { }, htmlAttributes: new { @class = "buttonAb" })
+        @Html.ActionLink("MyBooks", "GetById", "UserBook", new { }, htmlAttributes: new { @class = "buttonAb" })
     
         </div>
     </div> 
-</center>
+
 
 

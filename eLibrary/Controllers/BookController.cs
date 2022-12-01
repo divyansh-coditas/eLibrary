@@ -49,40 +49,6 @@ namespace eLibrary.Controllers
        
         }
 
-        public ActionResult Get(string next, string previous) 
-        {
-            if (next == null && previous == null)
-            {
-                var result = (bookdata.Get()).Take(6);
-                Session["Pagination"] = 6;
-                return View("GetBooks",result);
-            }
-            else if (next != null)
-            {
-                int val = Convert.ToInt32(Session["Pagination"]);
-                var result = (bookdata.Get().Skip(val)).Take(6);
-                if (!result.Any())
-                {
-                    result = (bookdata.Get()).Take(6);
-                    Session["Pagination"] = 6;
-                }
-                Session["Pagination"] = 6 + val;
-                return View("GetBooks", result);
-
-            }
-            else
-            {
-                int val = Convert.ToInt32(Session["Pagination"]) - 12;
-                var result = (bookdata.Get()).Skip(val).Take(6);
-                if (!result.Any())
-                {
-                    result = (bookdata.Get()).Take(6);
-                    Session["Pagination"] = 6;
-                }
-                Session["Pagination"] = 6 + val;
-                return View("GetBooks", result);
-            }
-        }
 
         public ActionResult GetBookByName(string BookName) 
         {
@@ -105,10 +71,22 @@ namespace eLibrary.Controllers
         }
 
         [HttpPost]
-
         public ActionResult Edit(int id, BookDetail bookDetail) 
         {
             bookdata.Edit(id, bookDetail);
+            return RedirectToAction("GetBooks");
+        }
+
+        public ActionResult Create() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+
+        public ActionResult Create(BookDetail bookdetail) 
+        {
+            bookdata.Create(bookdetail);
             return RedirectToAction("GetBooks");
         }
     }

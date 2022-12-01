@@ -28,15 +28,15 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr> 
             <td>
                 @Html.DisplayFor(modelItem => item.Bookname)
             </td>
             <td>
-                @item.IssueDate.ToShortDateString()
+                @item.IssueDate.Value.ToShortDateString()
             </td>
             <td>
-                @item.SubmissionDate.ToShortDateString()
+                @item.SubmissionDate.Value.ToShortDateString()
             </td>
             <td>
                 @Html.ActionLink("Submit", "Submit", new { id = item.BookId }, htmlAttributes: new { @class = "buttonAb" })

@@ -6,8 +6,12 @@
 <style>
     body {
         background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-size: 1000px 700px;
+    }
+    th {
+        background-color: rosybrown;
+        color: white;
+        height: 50px;
     }
 </style>
 <br>
@@ -22,9 +26,7 @@
                 <tr>
                     <td>CategoryName</td>
                     <td><input type="text" name="CategoryName"></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Search" class="btn" /></td>
+                    <td><input type="submit" value="Search" class="btn" style="margin-left: 10px;"/></td>
                 </tr>
             </table>
         }
@@ -37,11 +39,8 @@ else
     </p>
 }
 <br>
-<table class="table table-bordered table-striped tables">
+<table class="table table-bordered tables" style="background-color: mintcream" >
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CategoryName)
         </th>
@@ -52,9 +51,6 @@ else
     @foreach (var item in Model)
     {
         <tr>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
