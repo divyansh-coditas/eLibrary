@@ -10,18 +10,17 @@
     }
    
 </style>
-
 <br>
 <br>
 @if (User.IsInRole("User")) { 
-    <div class="table table-bordered" style="padding:5px; border: 2px solid; border-color:black; border-radius: 10px">
+    <div class="table table-bordered tables" style="padding:5px;">
         @using (Html.BeginForm("GetBookByName", "Book"))
         {
             <table style="text-align:center">
                 <tr>
                     <td>Enter Name:<td>
                     <td><input type="text" name="BookName" required></td>              
-                    <td><input type="submit" value="Search" class="btn" style="margin-left:10px"></td>
+                    <td><input type="submit" value="Search" class="btn buttonAb buttonAbc" style="margin-left:10px"></td>
                 </tr>
                 
 
@@ -36,7 +35,7 @@ else
     </p>
 }
 <br>
-<table class="table table-bordered" style="border-radius: 10px; border: 2px solid; border-color:black; background-color: mintcream">
+<table class="table table-bordered tables">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BookName)

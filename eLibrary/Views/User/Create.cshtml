@@ -1,67 +1,114 @@
-﻿@model eLibrary.User
+﻿@*@model eLibrary.User*@
 
 @{
     ViewBag.Title = "Create";
 }
 
-<head>
+@*<head>
     <style>
         body {
             background-image: url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGJvb2t8ZW58MHx8MHx8&w=1000&q=80');
             background-size: 1400px 700px;
         }
     </style>
-</head>
-<script>
-    function ValidateAge() {
-        let age = document.forms["RegistrationForm"]["Age"].value;
-        if (age < 4) {
-            alert();
-            return false;
-        }
-    }
-</script>
+</head>*@
 
 
-@using (@Html.BeginForm(null, null, FormMethod.Post, new { name = "RegistrationForm" }))
+@*@using (@Html.BeginForm(null, null, FormMethod.Post, new { id = "RegistrationForm" }))
 {
-    <br>
-    <br>
-    <br>
+    <br><br><br>
     <h2 style="margin-left:15px;">Register</h2>
     @Html.AntiForgeryToken()
 
     <table style=" border-collapse:separate; border-spacing: 10px 15px">
         <tr>
             <td><label>Username:</label></td>
-            <td>@Html.TextBoxFor(m => m.UserName, new { @Value = @Model.UserName, @required = "required" })</td>
+            <td>@Html.TextBoxFor(m => m.UserName, new { @Value = @Model.UserName})</td>
+            <td>@Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger"})</td>
         </tr>
         <tr>
             <td><label>Password:</label></td>
-            <td>@Html.TextBoxFor(m => m.UserPassword, new { @Value = @Model.UserPassword, @required = "required" })</td>
+            <td>@Html.PasswordFor(m => m.UserPassword, new { @Value = @Model.UserPassword})</td>
         </tr>
         <tr>
             <td><label>ContactNo:</label></td>
-            <td>@Html.TextBoxFor(m => m.ContactNo, new { @Value = @Model.ContactNo, @required = "required" })</td>
+            <td>@Html.TextBoxFor(m => m.ContactNo, new { @Value = @Model.ContactNo})</td>
         </tr>
         <tr>
             <td><label>Address:</label></td>
-            <td>@Html.TextBoxFor(m => m.UserAddress, new { @Value = @Model.UserAddress, @required = "required" })</td>
+            <td>@Html.TextBoxFor(m => m.UserAddress, new { @Value = @Model.UserAddress})</td>
         </tr>
         <tr>
             <td><label>Ocuupation:</label></td>
-            <td>@Html.TextBoxFor(m => m.Occupation, new { @Value = @Model.Occupation, @required = "required" })</td>
+            <td>@Html.TextBoxFor(m => m.Occupation, new { @Value = @Model.Occupation})</td>
         </tr>
         <tr>
             <td><label>Age:</label></td>
-            <td>@Html.TextBoxFor(m => m.Age, new { @Value = @Model.Age, @required = "required", name = "Age" })</td>
+            <td>@Html.TextBoxFor(m => m.Age, new { @Value = @Model.Age})</td>
         </tr>
         <tr>
+
         </tr>
     </table>
 <input type="submit" value="Register" class="buttonAb" style="margin-left:110px;">
 @Html.ActionLink("Login", "Login", "User", htmlAttributes: new { @class = "buttonAb" })
-}
-@section Scripts {
+}*@
+<div id="Errormsg"></div>
+<form  asp-action="Create" asp-controller="User" name="registrationform" onsubmit="return validateform()" method="post">
+    <br><br><br>
+    <h2 style="margin-left:15px;">Register</h2>
+
+    <table style=" border-collapse:separate; border-spacing: 10px 15px">
+        <tr>
+            <td><label for="UserName">Username:</label></td>
+            <td><input type="text" id="UserName" name="UserName"></td>
+            @*<td>@Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })</td>*@
+        </tr>
+        <tr>
+            <td><label>Password:</label></td>
+            <td><input type="text" id="password"></td>
+        </tr>
+        <tr>
+            <td><label>ContactNo:</label></td>
+            <td><input type="tel" id="phone"></td>
+        </tr>
+        <tr>
+            <td><label>Address:</label></td>
+            <td><input type="text" id="address"></td>
+        </tr>
+        <tr>
+            <td><label>Occupation:</label></td>
+            <td><input type="text" id="occupation"></td>
+        </tr>
+        <tr>
+            <td><label>Age:</label></td>
+            <td><input type="text" id="age"></td>
+        </tr>
+        <tr>
+        </tr>
+    </table>
+    <input type="submit" value="Register" class="buttonAb" style="margin-left:110px;">
+</form>
+
+<script>
+    function validateform() {
+        let name = document[registrationform].getElementById("username").value;
+        let password = document.registrationform.getElementById("password").value;
+        let contactno = document.registrationform.getElementById("phone").value;
+        let address = document.registrationform.getElementById("address").value;
+        let ocupation = document.registrationform.getElementById("occupation").value;
+        let age = document.resgistrationform.getElementById("age").value;
+
+        if (name.length < 3) {
+            document.getElementById("Errormsg").innerHTML = "Invalid";
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+</script>
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

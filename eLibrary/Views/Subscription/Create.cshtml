@@ -12,11 +12,12 @@
 <br>
 <br>
 <br><br>
-@*<script>
+<script>
     function successfullySubscribed() {
-        window.alert('successfullySubscribed');
+        alert('successfullySubscribed');
+        return true;
     }
-</script>*@
+</script>
 @if (@money > 0)
 {
     <div class="table-bordered tables" style="background-color:cornsilk; padding:8px 8px 8px 8px; opacity: 0.9">
@@ -47,7 +48,7 @@
                 <input type="radio" name="gender" value="female" required> Female<br>
             </div>
             <h4>Payment Details</h4>
-            <label>CardNumber</label><input type="tel" required><input type="tel" required><input type="tel" required>
+            <label>CardNumber</label><input type="tel" size="4" required><input type="tel" size="4" required><input type="tel" size="4" required>
             <label>CVV</label>
             <select required>
                 <option>01 Jun</option>
@@ -60,7 +61,7 @@
             <label style="height:15px"><input type="hidden" name="money" value="@money">@money</label>
             <center>
                 <div style="margin-top: 10px">
-                    <input type="submit" name="PayNow" onclick="successfullySubscribed()" value="Submit" class="buttonAb" />
+                    <input type="submit" name="PayNow" onsubmit="successfullySubscribed()" value="Submit" class="buttonAb" />
                 </div>
             </center>
         }
@@ -83,12 +84,12 @@ else
                     <tbody>
                         <tr style="margin-bottom:10px">
                             <td>
-                                <select name="str" style="margin-left:15px" required>
-                                    <option >Select..</option>
+                                <select name="months" style="margin-left:15px" required>
+                                    <option value="" disabled selected>Select..</option>
                                     <option value="1">1Month</option>
                                     <option value="3">3Months</option>
                                     <option value="6">6Months</option>
-                                    <option value="6">1Year</option>
+                                    <option value="12">1Year</option>
                                 </select>
                             </td>
                         </tr>

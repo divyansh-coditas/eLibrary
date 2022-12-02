@@ -19,44 +19,45 @@
     }
 </style>
 
-    <div class="jumbotron" style="width: 400px; height: 500px; background-color: gray; padding: 4px 4px 4px 4px;border-radius: 20px;text-align:center;opacity: 50% ">
-        <h2 class="display-4">Hello @User.Identity.Name</h2><br>
+    <div class="jumbotron dashboard">
+        <h2 class="display-4">Hello @User.Identity.Name</h2>
         <hr style="color:red">
         <center>
-        <table>
-            <thead>
-                <tr>
-                    <th><label>UserId:</label></th>
-                    <th><label>@Model.UserId</label></th>
-                </tr>
-                <tr>
-                    <th><label>Name:</label></th>
-                    <th><label>@Model.UserName</label></th>
-                </tr>
-                <tr>
-                    <th><label>Age:</label></th>
-                    <th><label>@Model.Age</label></th>
-                </tr>
-                <tr>
-                    <th><label>Address:</label></th>
-                    <th><label>@Model.UserAddress</label></th>
-                </tr>
-                <tr>
-                    <th><label>ContactNo:</label></th>
-                    <th><label>@Model.ContactNo</label></th>
-                </tr>
-                <tr>
-                    <th><label>Occupation:</label></th>
-                    <th><label>@Model.Occupation</label></th>
-                </tr>
-            </thead>
-        </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th><label>UserId:</label></th>
+                        <th><label>@Model.UserId</label></th>
+                    </tr>
+                    <tr>
+                        <th><label>Name:</label></th>
+                        <th><label>@Model.UserName</label></th>
+                    </tr>
+                    <tr>
+                        <th><label>Age:</label></th>
+                        <th><label>@Model.Age</label></th>
+                    </tr>
+                    <tr>
+                        <th><label>Address:</label></th>
+                        <th><label>@Model.UserAddress</label></th>
+                    </tr>
+                    <tr>
+                        <th><label>ContactNo:</label></th>
+                        <th><label>@Model.ContactNo</label></th>
+                    </tr>
+                    <tr>
+                        <th><label>Occupation:</label></th>
+                        <th><label>@Model.Occupation</label></th>
+                    </tr>
+                </thead>
+            </table>
+            @Html.ActionLink("MySubscription", "Create", "Subscription", new { }, htmlAttributes: new { @class = "buttonAb buttonAbc" })
+
+            @Html.ActionLink("MyBooks", "GetById", "UserBook", new { }, htmlAttributes: new { @class = "buttonAb buttonAbc" })
         </center><br>
         <div>
             
-        @Html.ActionLink("MySubscription", "Create", "Subscription", new { }, htmlAttributes: new { @class = "buttonAb" })
-        
-        @Html.ActionLink("MyBooks", "GetById", "UserBook", new { }, htmlAttributes: new { @class = "buttonAb" })
+       
     
         </div>
     </div> 

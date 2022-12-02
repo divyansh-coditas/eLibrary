@@ -64,5 +64,12 @@ namespace eLibrary.Services
             context.BookDetails.Add(bookdetail);
             context.SaveChanges();
         }
+
+        public void delete(int id) 
+        {
+            var result = context.BookDetails.Find(id);
+            context.BookDetails.Remove(result);
+            context.SaveChanges();
+        }
     }
 }

@@ -40,7 +40,10 @@ textarea {
     border: 1px solid;
     border-radius: 4px;
     /*margin-left:130px;*/
-    opacity: 0.7
+    /*opacity: 0.7*/
+}
+.buttonAbc:hover {
+    background-color: lightgreen;
 }
 
 .login {
@@ -95,11 +98,30 @@ th {
     height: 50px;
 }
 
-
-
 .bgimage {
     background-image:src('../img/background-image.png');
     
+}
+
+.about {
+    color: black;
+    background-color: mintcream;
+    border-radius: 10px;
+    border: 2px solid;
+    border-color: black;
+    margin-top: 20px;
+    padding: 10px 10px 10px 10px;
+    opacity: 0.8;
+}
+
+.dashboard {
+    width: 400px;
+    height: 470px;
+    background-color: gray;
+    padding: 4px 4px 4px 4px;
+    border-radius: 20px;
+    text-align: center;
+    opacity: 50%;
 }
 
 

@@ -264,7 +264,6 @@
     <Content Include="Views\Subscription\Create.cshtml" />
     <Content Include="Views\Subscription\View.cshtml" />
     <Content Include="Views\Userbook\GetAccess.cshtml" />
-    <Content Include="Views\Userbook\Practice.cshtml" />
     <Content Include="Views\Userbook\GetById.cshtml" />
     <Content Include="Views\Userbook\View.cshtml" />
     <Content Include="Views\Userbook\GetAllUsersWithBooks.cshtml" />

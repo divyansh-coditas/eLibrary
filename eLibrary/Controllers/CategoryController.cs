@@ -52,8 +52,15 @@ namespace eLibrary.Controllers
         
         public ActionResult Delete(int id) 
         {
-            var result = catdata.Delete(id);
-            return RedirectToAction("Get");
+            try
+            {
+                var result = catdata.Delete(id);
+                return RedirectToAction("Get");
+            }
+            catch (Exception ex) 
+            {
+                return View("Error");
+            }
         }
 
         

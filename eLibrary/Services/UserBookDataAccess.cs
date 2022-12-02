@@ -16,7 +16,6 @@ namespace eLibrary.Services
             var result = context.UserBookDetails.ToList();
             return result;
         }
-
         public int Create(UserBookDetail userBookDetail)
         {
             context.UserBookDetails.Add(userBookDetail);
@@ -26,7 +25,8 @@ namespace eLibrary.Services
 
         public UserBookDetail Access(int bookid, int userid)
         {
-            var bookDetail = bookdata.Get(bookid);           
+            var bookDetail = bookdata.Get(bookid); 
+            // adding the data in userbook table for admin approval 
             UserBookDetail userbookdetail = new UserBookDetail()
             {
                 UserId = userid,
@@ -38,6 +38,7 @@ namespace eLibrary.Services
             return userbookdetail;
         }
 
+        //after book submission upadte the userbookdetails the table
         public UserBookDetail Update(int id, int fine, int userid)
         {
             var result = context.UserBookDetails.ToList().Where(m => m.BookId == id && m.UserId == userid && (m.Is_Submitted == false || m.Is_Submitted == null)).FirstOrDefault();
@@ -46,18 +47,6 @@ namespace eLibrary.Services
             result.Fine = fine;
             result.Is_Paid = true;
             context.SaveChanges();
-            return result;
-        }
-
-        public IEnumerable<sp_GetAllUsersBooks_Result> GetAllUsersHavingBooks()
-        {
-            var result = context.sp_GetAllUsersBooks().ToList().Where(m => m.SubmittedOn == null);
-            return result;
-        }
-
-        public IEnumerable<sp_GetNotApprovedUserBooks_Result> GetNotApprovedUserBooks()
-        {
-            var result = context.sp_GetNotApprovedUserBooks().ToList();
             return result;
         }
 
@@ -74,12 +63,24 @@ namespace eLibrary.Services
         }
 
         // Delete UserBookDetails for Approval
-
         public UserBookDetail DeleteUserBook(int detailid) 
         {
             var result = context.UserBookDetails.Find(detailid);
             context.UserBookDetails.Remove(result);
             context.SaveChanges();
+            return result;
+        }
+
+        // For Admin Use 
+        public IEnumerable<sp_GetAllUsersBooks_Result> GetAllUsersHavingBooks()
+        {
+            var result = context.sp_GetAllUsersBooks().ToList().Where(m => m.SubmittedOn == null);
+            return result;
+        }
+
+        public IEnumerable<sp_GetNotApprovedUserBooks_Result> GetNotApprovedUserBooks()
+        {
+            var result = context.sp_GetNotApprovedUserBooks().ToList();
             return result;
         }
     }

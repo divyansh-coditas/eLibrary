@@ -10,9 +10,9 @@
     }
 </style>
 <script>
-    function js()
+    function fine()
     {
-        return true;
+        alert("Successfully Paid");
     }
 </script>
 <div class="table-bordered" style="background-color: lightyellow; border: 2px solid; border-color:black; padding:8px 8px 8px 8px" >
@@ -47,7 +47,7 @@
         <label>CVV</label><select><option>01Jun</option><option>10Dec</option></select> <select><option>2023</option><option>2024</option></select>
         <label>Amount: </label><input type="hidden" name="str" value="true"><label id="mon" style="height:10px">@money</label>
         <div>
-            <input type="submit" value="Submit" class="btn btn-primary buttonAb"/>
+            <input type="submit" value="Submit" onsubmit="fine()" class="btn btn-primary buttonAb"/>
         </div>
     }
 </div>

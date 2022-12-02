@@ -16,33 +16,33 @@ namespace eLibrary.Controllers
         {
             if (next == null && previous == null)
             {
-                var result = (bookdata.Get().Where(m => m.Quantity > 0)).Take(6);
-                Session["Pagination"] = 6;
+                var result = (bookdata.Get().Where(m => m.Quantity > 0)).Take(5);
+                Session["Pagination"] = 5;
                 return View(result);
             }
             else if (next != null)
             {
                 int val = Convert.ToInt32(Session["Pagination"]);
-                var result = (bookdata.Get().Where(m => m.Quantity > 0)).Skip(val).Take(6);
+                var result = (bookdata.Get().Where(m => m.Quantity > 0)).Skip(val).Take(5);
                 if (!result.Any()) 
                 {
-                    result = (bookdata.Get().Where(m => m.Quantity > 0)).Take(6);
-                    Session["Pagination"] = 6;
+                    result = (bookdata.Get().Where(m => m.Quantity > 0)).Take(5);
+                    Session["Pagination"] = 5;
                 }
-                Session["Pagination"] = 6 + val;
+                Session["Pagination"] = 5 + val;
                 return View(result);
                
             }
             else
             {
-                int val = Convert.ToInt32(Session["Pagination"]) -12;
-                var result = (bookdata.Get().Where(m => m.Quantity > 0)).Skip(val).Take(6);
+                int val = Convert.ToInt32(Session["Pagination"]) -10;
+                var result = (bookdata.Get().Where(m => m.Quantity > 0)).Skip(val).Take(5);
                 if (!result.Any())
                 {
-                    result = (bookdata.Get().Where(m => m.Quantity > 0)).Take(6);
-                    Session["Pagination"] = 6;
+                    result = (bookdata.Get().Where(m => m.Quantity > 0)).Take(5);
+                    Session["Pagination"] = 5;
                 }
-                Session["Pagination"] = 6 + val;
+                Session["Pagination"] = 5 + val;
                 return View(result);
             }
             
@@ -52,7 +52,7 @@ namespace eLibrary.Controllers
 
         public ActionResult GetBookByName(string BookName) 
         {
-            var result = bookdata.Get().Where(x => x.BookName == BookName);
+            var result = bookdata.Get().Where(x => x.BookName.ToLower() == BookName.ToLower());
             if (result != null) 
             {
                 return View(result);
@@ -87,6 +87,12 @@ namespace eLibrary.Controllers
         public ActionResult Create(BookDetail bookdetail) 
         {
             bookdata.Create(bookdetail);
+            return RedirectToAction("GetBooks");
+        }
+
+        public ActionResult Delete(int id) 
+        {
+            bookdata.delete(id);
             return RedirectToAction("GetBooks");
         }
     }

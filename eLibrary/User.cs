@@ -6,12 +6,12 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace eLibrary
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,14 +20,25 @@ namespace eLibrary
             this.Subscriptions = new HashSet<Subscription>();
             this.UserBookDetails = new HashSet<UserBookDetail>();
         }
-    
+
         public int UserId { get; set; }
+        //[Required(ErrorMessage = "Please Enter Username")]
         public string UserName { get; set; }
+        //[Required(ErrorMessage = "Please Enter ContactNo")]
+        //[StringLength(10, MinimumLength = 10, ErrorMessage = "Please Enter Correct ContactNo")]
         public string ContactNo { get; set; }
+        //[Required(ErrorMessage = "Please Enter Occupation")]
         public string Occupation { get; set; }
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Enter Age")]
+        //[Range(4,100, ErrorMessage = "Please Enter Valid Age")]
         public int Age { get; set; }
+        // [Required]
         public int RoleID { get; set; }
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter Password")]
+        //[StringLength(10, MinimumLength = 10, ErrorMessage ="Password is too small")]
         public string UserPassword { get; set; }
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter Address")]
+        //[StringLength(10, MinimumLength = 10, ErrorMessage = "Enter Valid Address")]
         public string UserAddress { get; set; }
     
         public virtual Role Role { get; set; }

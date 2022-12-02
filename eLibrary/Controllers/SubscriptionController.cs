@@ -34,7 +34,7 @@ namespace eLibrary.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string str, string money) 
+        public ActionResult Create(string months, string money) 
         {
             var result = data.Get().Where(m => m.UserId == Convert.ToInt32(Session["Id"])).FirstOrDefault();
             if (result != null)
@@ -43,9 +43,9 @@ namespace eLibrary.Controllers
                 return View("View");
             }
 
-            if (str != null)
+            if (months != null)
             {
-                ViewBag.Message = int.Parse(str) * 150;
+                ViewBag.Message = Convert.ToInt32(months) * 150;
                 return View(ViewBag.Message);
             }
             else

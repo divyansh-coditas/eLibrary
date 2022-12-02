@@ -10,9 +10,7 @@ namespace eLibrary.Controllers
 {
     public class UserController : Controller
     {
-         UserDataAccess userdata = new UserDataAccess();
-         UserRoleProvider role = new UserRoleProvider();
-
+        UserDataAccess userdata = new UserDataAccess();
         public ActionResult Get()
         {
             var data = userdata.Get();
@@ -29,12 +27,19 @@ namespace eLibrary.Controllers
 
         public ActionResult Create(User user)
         {
-            user.RoleID = 2;
-            bool isValid = userdata.Get().Any(x => x.UserName == user.UserName && x.UserPassword == user.UserPassword);
-            if (!isValid)
+            if (ModelState.IsValid)
             {
-                var response = userdata.Create(user);
-                return RedirectToAction("Login");
+                user.RoleID = 2;
+                bool isValid = userdata.Get().Any(x => x.UserName == user.UserName && x.UserPassword == user.UserPassword);
+                if (!isValid)
+                {
+                    var response = userdata.Create(user);
+                    return RedirectToAction("Login");
+                }
+                else 
+                {
+                    return View();
+                }
             }
             else
             {
@@ -56,32 +61,23 @@ namespace eLibrary.Controllers
                 bool isValid = context.Users.Any(u => u.UserName == name && u.UserPassword == password);
                 if (isValid)
                 {
-                    var data = (from us in context.Users
+                    var data = (from us in userdata.Get()
                                 where us.UserName == name && us.UserPassword == password
                                 select us).ToList();
                     Session["Id"] = data[0].UserId;
                     FormsAuthentication.SetAuthCookie(name, false);
-                    if (role.IsUserInRole(name,"Admin"))
-                    {
-                        return RedirectToAction("Get", "User");
-                    }
-                    else
-                    {
-                        return RedirectToAction("DashBoard");
-                    }
+                    return RedirectToAction("DashBoard");                
                 }
                 ModelState.AddModelError("", "Invalid username or password");
                 
                 return View();
             }
         }
-
         public ActionResult DashBoard() 
         {
             var result = userdata.Get().Where(m => m.UserId == Convert.ToInt32(Session["Id"])).FirstOrDefault();
             return View(result);
         }
-
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();

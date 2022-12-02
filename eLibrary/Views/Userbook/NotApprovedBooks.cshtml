@@ -12,7 +12,7 @@
     }
 </style>
 
-<table class="table">
+<table class="table table-bordered tables">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -36,11 +36,11 @@
                 @Html.DisplayFor(modelItem => item.BookName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IssueDate)
+                @item.IssueDate.Value.ToShortDateString()
             </td>
             <td>
-                @Html.ActionLink("Approve", "Approve", new { detailid = item.DetailId }) |
-                @Html.ActionLink("Delete", "DeleteUserBook", new { detailid = item.DetailId })
+                @Html.ActionLink("Approve", "Approve", new { detailid = item.DetailId }, htmlAttributes:new { @class = "buttonAb buttonAbc"})
+                @Html.ActionLink("Delete", "DeleteUserBook", new { detailid = item.DetailId }, htmlAttributes: new { @class = "buttonAb buttonAbc" })
             </td>
         </tr>
     }

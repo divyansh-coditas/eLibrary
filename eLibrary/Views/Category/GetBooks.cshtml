@@ -3,81 +3,84 @@
 @{
     ViewBag.Title = "GetBooks";
 }
-<br><br><br>
+<br>
+<br>
+<br>
 <style>
     body {
         background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
         background-repeat: no-repeat;
         background-size: cover;
     }
+
     th {
         background-color: rosybrown;
         color: white;
         height: 50px;
     }
 </style>
+@if (Model.Any())
+{
+    <table class="table table-bordered tables">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RackNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookLanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            @if (User.IsInRole("User"))
+            {
+                <th></th>
+            }
 
-<table class="table table-bordered tables">
-    <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.BookId)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.BookName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuthorName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RackNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookLanguage)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        @if (User.IsInRole("User"))
+        </tr>
+
+        @foreach (var item in Model)
         {
-        <th></th>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RackNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookLanguage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @if (User.IsInRole("User"))
+                    {
+                        @Html.ActionLink("GetAccess", "GetAccess", "Userbook", new { id = item.BookId }, htmlAttributes: new { @class = "buttonAb" })
+                    }
+                </td>
+            </tr>
         }
 
-    </tr>
+    </table>
+}
+else
+{
+    <center>
+        <div class="jumbotron" style="height:200px; width: 500px; margin-top: 40px; background-color: lightyellow; opacity: 70%">
+            <h3>Sorry!!! This Category is not available</h3>
+            @Html.ActionLink("Search More", "Get", new { }, htmlAttributes: new { @class = "buttonAb buttonAbc" })
+        </div>
+    </center>
+}
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.BookId)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.BookName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AuthorName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RackNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookLanguage)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @if(User.IsInRole("User"))
-                {
-                @Html.ActionLink("GetAccess", "GetAccess", "Userbook", new { id = item.BookId }, htmlAttributes: new { @class = "buttonAb" })
-                }
-            </td>
-        </tr>
-    }
-
-</table>
