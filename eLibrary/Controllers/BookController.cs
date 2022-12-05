@@ -11,7 +11,9 @@ namespace eLibrary.Controllers
     public class BookController : Controller
     {
         BookDataAccess bookdata = new BookDataAccess();
-       
+        CategoryDataAccess categorydata = new CategoryDataAccess();
+        
+        // this action method will return all the books to the user ands also implemented pagination
         public ActionResult GetBooks(string next, string previous)
         {
             if (next == null && previous == null)
@@ -24,12 +26,15 @@ namespace eLibrary.Controllers
             {
                 int val = Convert.ToInt32(Session["Pagination"]);
                 var result = (bookdata.Get().Where(m => m.Quantity > 0)).Skip(val).Take(5);
-                if (!result.Any()) 
+                if (!result.Any())
                 {
                     result = (bookdata.Get().Where(m => m.Quantity > 0)).Take(5);
                     Session["Pagination"] = 5;
                 }
-                Session["Pagination"] = 5 + val;
+                else
+                {
+                    Session["Pagination"] = 5 + val;
+                }
                 return View(result);
                
             }
@@ -42,17 +47,21 @@ namespace eLibrary.Controllers
                     result = (bookdata.Get().Where(m => m.Quantity > 0)).Take(5);
                     Session["Pagination"] = 5;
                 }
-                Session["Pagination"] = 5 + val;
+                else
+                {
+                    Session["Pagination"] = 5 + val;
+                }
                 return View(result);
             }
             
        
         }
 
-
-        public ActionResult GetBookByName(string BookName) 
+        // this action method will return the user book based on their search
+        public ActionResult GetBookByName(string searchtext) 
         {
-            var result = bookdata.Get().Where(x => x.BookName.ToLower() == BookName.ToLower());
+            var result = bookdata.Get().Where(x => x.BookName.ToLower().Contains(searchtext.ToLower()) || x.BookLanguage.ToLower() == searchtext.ToLower() 
+                         || x.AuthorName.ToLower().Contains(searchtext.ToLower()) || x.Rating.ToLower() == searchtext.ToLower());
             if (result != null) 
             {
                 return View(result);
@@ -60,40 +69,65 @@ namespace eLibrary.Controllers
             return View();
         }
 
-        public ActionResult GetAccess(int id) 
-        {
-            return RedirectToAction("GetAccess");
-        }
 
+        // this action method is for editing the details of the book
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit() 
         {
-            return View();
+            BookDetail book = new BookDetail();
+            var categories = categorydata.Get().ToList();
+            var categoryname = from cat in categories
+                               select cat.CategoryName;
+            ViewBag.CategoryName = categoryname;
+            return View(book);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, BookDetail bookDetail) 
+        public ActionResult Edit(int id, BookDetail bookDetail, string categoryname) 
         {
+            var categoryid = categorydata.Get().Where(m => m.CategoryName == categoryname).Select(m => m.CategoryId).FirstOrDefault();
+            bookDetail.CategoryId = categoryid;
             bookdata.Edit(id, bookDetail);
             return RedirectToAction("GetBooks");
         }
 
+        // this action method is for creating a new book in the databse
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Create() 
         {
+            var categories = categorydata.Get().ToList();
+            var categoryname = from cat in categories
+                               select cat.CategoryName;
+            ViewBag.CategoryName = categoryname;
             return View();
         }
 
         [HttpPost]
-
-        public ActionResult Create(BookDetail bookdetail) 
+        public ActionResult Create(BookDetail bookdetail, string categoryname) 
         {
+            var categoryid = categorydata.Get().Where(m => m.CategoryName == categoryname).Select(m => m.CategoryId).FirstOrDefault();
+            bookdetail.CategoryId = categoryid;
             bookdata.Create(bookdetail);
             return RedirectToAction("GetBooks");
         }
 
+        // this action method is for deletion of the existing book
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id) 
         {
-            bookdata.delete(id);
-            return RedirectToAction("GetBooks");
+            try
+            {
+                bookdata.delete(id);
+                return RedirectToAction("GetBooks");
+            }
+            catch (Exception)
+            {
+
+                return View("Error");
+            }
         }
     }
 }

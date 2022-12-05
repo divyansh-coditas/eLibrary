@@ -12,17 +12,17 @@ namespace eLibrary.Controllers
     {
         CategoryDataAccess catdata = new CategoryDataAccess();
         BookDataAccess bookdata = new BookDataAccess();
-        public ActionResult Index()
-        {
-            return View();
-        }
 
+        // this action method will return all the categories to the user
         public ActionResult Get() 
         {
             var result = catdata.Get();
             return View(result);
         }
 
+        // this action method is for creating new books 
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Create() 
         {
             return View();
@@ -36,6 +36,9 @@ namespace eLibrary.Controllers
             return RedirectToAction("Get","Category");
         }
 
+        // this action method for editing the details of the existing book 
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit() 
         {
             return View();
@@ -49,7 +52,8 @@ namespace eLibrary.Controllers
             return RedirectToAction("Get");
         }
 
-        
+        // this action method is for deleting the existing from the record 
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id) 
         {
             try
@@ -57,13 +61,13 @@ namespace eLibrary.Controllers
                 var result = catdata.Delete(id);
                 return RedirectToAction("Get");
             }
-            catch (Exception ex) 
+            catch (Exception) 
             {
                 return View("Error");
             }
         }
 
-        
+        // this action method will return all the books under the category provided by the user
         public ActionResult GetBooks(string CategoryName)
         {
             //string bookname = book.CategoryName;

@@ -9,12 +9,14 @@ namespace eLibrary.Services
     {
         eLibraryEntities context = new eLibraryEntities();
 
+        // this will return all the bookdetails
         public IEnumerable<BookDetail> Get() 
         {
             var result = context.BookDetails.ToList().Where(m => m.Quantity > 0);
             return result;
         }
-
+        
+        // this will retturn the books based on the category name
         public IEnumerable<BookDetail> GetBooks(string name) 
         {
             var result = from book in context.BookDetails
@@ -23,13 +25,15 @@ namespace eLibrary.Services
                          select book;
             return result;
         }
-
+        
+        // this method will return the book based on bookid
         public BookDetail Get(int id) 
         {
             var result = context.BookDetails.Find(id);
             return result;
         }
 
+        // this method is to update the book details
         public BookDetail Update(int id) 
         {
             var book = context.BookDetails.Find(id);
@@ -38,6 +42,7 @@ namespace eLibrary.Services
             return book;
         }
 
+        // this method is to incearse the quanitiy of the books when user will submit it
         public BookDetail Submit(int id) 
         {
             var book = context.BookDetails.Find(id);
@@ -46,6 +51,7 @@ namespace eLibrary.Services
             return book;
         }
 
+        // this method is edit the details of the book 
         public BookDetail Edit(int id, BookDetail bookdetail) 
         {
             var book = context.BookDetails.Find(id);
@@ -59,12 +65,14 @@ namespace eLibrary.Services
             return book;
         }
 
+        // this method is for creating new books
         public void Create( BookDetail bookdetail) 
         {
             context.BookDetails.Add(bookdetail);
             context.SaveChanges();
         }
 
+        // this method is for deleting the book
         public void delete(int id) 
         {
             var result = context.BookDetails.Find(id);

@@ -11,6 +11,8 @@ namespace eLibrary.Controllers
     public class UserController : Controller
     {
         UserDataAccess userdata = new UserDataAccess();
+
+        // this action method will return all the user of the application
         public ActionResult Get()
         {
             var data = userdata.Get();
@@ -18,34 +20,26 @@ namespace eLibrary.Controllers
         }
 
         public ActionResult Create()
-        {
-            var User = new User();
-            return View(User);
+        { 
+            return View();
         }
 
+        // this action method is to register new user
         [HttpPost]
-
         public ActionResult Create(User user)
         {
-            if (ModelState.IsValid)
-            {
                 user.RoleID = 2;
+                // this will check whether the user already exist or not
                 bool isValid = userdata.Get().Any(x => x.UserName == user.UserName && x.UserPassword == user.UserPassword);
                 if (!isValid)
                 {
                     var response = userdata.Create(user);
+                    TempData["login"] = 1;
                     return RedirectToAction("Login");
                 }
-                else 
-                {
-                    return View();
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "UserName Already Taken");
+
+                ViewBag.Message = "User already exist";
                 return View();
-            }
         }
 
         public ActionResult Login()
@@ -58,25 +52,36 @@ namespace eLibrary.Controllers
         {
             using (var context = new eLibraryEntities())
             {
+                // this will check the username and password matches or not
                 bool isValid = context.Users.Any(u => u.UserName == name && u.UserPassword == password);
                 if (isValid)
                 {
                     var data = (from us in userdata.Get()
                                 where us.UserName == name && us.UserPassword == password
                                 select us).ToList();
+                    // here storing the userid in Session
                     Session["Id"] = data[0].UserId;
                     FormsAuthentication.SetAuthCookie(name, false);
                     return RedirectToAction("DashBoard");                
                 }
-                ModelState.AddModelError("", "Invalid username or password");
-                
+                ViewBag.Message = "Invalid Username or Password"; ;    
                 return View();
             }
         }
+
+        [Authorize]
         public ActionResult DashBoard() 
         {
-            var result = userdata.Get().Where(m => m.UserId == Convert.ToInt32(Session["Id"])).FirstOrDefault();
-            return View(result);
+            if (Session["Id"] != null)
+            {
+                var result = userdata.Get().Where(m => m.UserId == Convert.ToInt32(Session["Id"])).FirstOrDefault();
+                return View(result);
+            }
+            else 
+            {
+                TempData["failed"] = 1;
+                return RedirectToAction("Login", "user");
+            }
         }
         public ActionResult LogOut()
         {

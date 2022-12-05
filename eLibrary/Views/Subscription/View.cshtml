@@ -1,17 +1,24 @@
 ﻿
 @{
-    ViewBag.Title = "View"; 
+    ViewBag.Title = "View";
     var message = ViewBag.Message;
+    
 }
-<style>
-    body {
-        background-image: url('https://cdn.pixabay.com/photo/2015/07/22/21/44/book-856151__480.jpg');
-        background-size: 1400px 700px;
-    }
-</style>
+<br><br><br>
+<head>
+    <style>
+        body {
+            background-image: url('https://cdn.pixabay.com/photo/2015/07/22/21/44/book-856151__480.jpg');
+            background-size: 1400px 700px;
+        }
+    </style>
+</head>
 <center>
-<div class="jumbotron" style="height:250px; width: 500px; margin-top: 40px; background-color: lightyellow; opacity: 50%">
-    <h3>You have already subscribed.</h3>
-    <h3>Your subscription will end on @message</h3>
-</div>
+    <div class="jumbotron monthform">
+        <h3>You have already subscribed.</h3>
+        <h3>Your subscription will end on @message</h3>
+    </div>
 </center>
+
+
+

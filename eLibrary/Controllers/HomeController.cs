@@ -8,11 +8,13 @@ namespace eLibrary.Controllers
 {
     public class HomeController : Controller
     {
+        // this is the home page
         public ActionResult Index()
         {
             return View();
         }
 
+        // this is the about page
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

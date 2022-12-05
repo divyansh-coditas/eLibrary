@@ -11,7 +11,7 @@
     }
 </style>
 
-<table class="table table-striped tables">
+<table class="table table-bordered tables">
     <tr>
         <th>
             <label>UserName</label>
@@ -45,7 +45,7 @@
             @item.IssueDate.ToShortDateString()
         </td>
         <td>
-            @item.SubmissionDate.ToShortDateString()
+            @item.SubmissionDate.Value.ToShortDateString()
         </td>
     </tr>
 }

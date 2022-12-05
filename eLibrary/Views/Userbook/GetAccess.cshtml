@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "GetAccess";
+    var message = ViewBag.Message;
 }
 
 <style>
@@ -11,9 +12,9 @@
     }
 </style>
 <center>
-    <div class="jumbotron" style="height:150px; width: 500px; margin-top: 40px; background-color: lightyellow; opacity: 50%">
+    <div class="jumbotron access">
         <center>
-            <h2>You are not authorised.</h2>
+            <h2>@message</h2>
         </center>
     </div>
 </center>

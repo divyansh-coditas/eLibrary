@@ -9,16 +9,8 @@
         background-size: cover;
     }
 </style>
-<script>
-    function fine()
-    {
-        alert("Successfully Paid");
-    }
-</script>
-<div class="table-bordered" style="background-color: lightyellow; border: 2px solid; border-color:black; padding:8px 8px 8px 8px" >
-    @using (Html.BeginForm("Submit", "Userbook"))
-    {
-
+<div class="table-bordered" style="background-color: lightyellow; border: 2px solid; border-color:black; padding:8px 8px 8px 8px">
+    <form asp-action="Submit" asp-controller="Userbook" onsubmit="return validatePayment()" method="post">
         <h2>Payment Details</h2>
         <table class="table table-bordered table-striped">
             <thead>
@@ -43,12 +35,28 @@
             <input type="radio" name="gender" value="female" required> Female<br>
         </div>
         <h4>Payment Details</h4>
-        <label>CardNumber</label><input type="tel" placeholder="1234" required><input type="tel" placeholder="1234" required><input type="tel" placeholder="1234" required>
+        <label>CardNumber</label><input type="number" id="card-1" required><input type="number" id="card-2" required><input type="number" id="card-3" required>
         <label>CVV</label><select><option>01Jun</option><option>10Dec</option></select> <select><option>2023</option><option>2024</option></select>
         <label>Amount: </label><input type="hidden" name="str" value="true"><label id="mon" style="height:10px">@money</label>
         <div>
-            <input type="submit" value="Submit" onsubmit="fine()" class="btn btn-primary buttonAb"/>
+            <input type="submit" value="Submit" onsubmit="fine()" class="btn btn-primary buttonAb" />
         </div>
-    }
+    </form>    
 </div>
 
+<script>
+    function validatePayment() {
+        let carddetail1 = document.getElementById("card-1").value;
+        let carddetail2 = document.getElementById("card-2").value;
+        let carddetail3 = document.getElementById("card-3").value;
+
+        if (carddetail1 < 1000 || carddetail1 > 9999 || carddetail2 < 1000 || carddetail2 > 9999 || carddetail3 < 1000 || carddetail3 > 9999) {
+
+            alert("Enter correct Card-details");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>

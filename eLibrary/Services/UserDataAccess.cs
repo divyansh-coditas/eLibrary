@@ -9,12 +9,14 @@ namespace eLibrary.Services
     {
         eLibraryEntities context = new eLibraryEntities();
 
+        // this method will return all the userdetails of the application
         public IEnumerable<User> Get()
         {
             var result = context.Users.ToList();
             return result;
         }
 
+        // this method is to create new user
         public int Create(User user)
         {
             context.Users.Add(user);
@@ -22,6 +24,7 @@ namespace eLibrary.Services
             return user.UserId;
         }
 
+        // this method is to search user based on their id
         public User Get(int id) 
         {
             var result = context.Users.Find(id);

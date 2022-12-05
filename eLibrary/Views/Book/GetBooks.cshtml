@@ -2,24 +2,43 @@
 
 @{
     ViewBag.Title = "GetBooks";
+    var isSuccess = Convert.ToInt32(TempData["success"]);
+    var isSubmitted = Convert.ToInt32(TempData["ispaid"]);
+    var isaccess = Convert.ToInt32(TempData["Access"]);
 }
-<style>
-    body {
-        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
-        background-size: cover;
-    }
-   
-</style>
+<head>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+            background-size: cover;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script>
+        if (@isSuccess == 1)
+        {
+            swal("Congratulations", "Subscribed Successfully", "success");
+        }
+        if (@isSubmitted == 1)
+        {
+            swal("Congratulations","Succesfully Submitted", "success");
+        }
+        if (@isaccess == 1)
+        {
+            swal("Wait", "Sent for approval", "success");
+        }
+    </script>
+</head>
 <br>
 <br>
 @if (User.IsInRole("User")) { 
-    <div class="table table-bordered tables" style="padding:5px;">
+    <div class="table table-bordered tables searchtbale">
         @using (Html.BeginForm("GetBookByName", "Book"))
         {
             <table style="text-align:center">
                 <tr>
-                    <td>Enter Name:<td>
-                    <td><input type="text" name="BookName" required></td>              
+                    <td>Enter here:<td>
+                    <td><input type="text" name="searchtext" required></td>              
                     <td><input type="submit" value="Search" class="btn buttonAb buttonAbc" style="margin-left:10px"></td>
                 </tr>
                 
@@ -85,7 +104,7 @@ else
                 @if (User.IsInRole("Admin"))
                 {
                     @Html.ActionLink("Edit", "Edit", new { id = item.BookId }, htmlAttributes: new {@class = "buttonAb"}) 
-                    @Html.ActionLink("Delete", "Delete", new { id = item.BookId}, htmlAttributes: new {@class = "buttonAb" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BookId}, htmlAttributes: new { onclick = "return confirmation()", @class = "buttonAb" })
                 }
                 else
                 {
@@ -102,7 +121,17 @@ else
        {
            <input type="submit" name="previous" value="Previous" />
            <input type="submit" name="next" value="Next" />
-       }
-    
-    
+       } 
 </center>
+
+<script>
+    function confirmation() {
+        const response = confirm('Are You Sure ?');
+        if (response) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>

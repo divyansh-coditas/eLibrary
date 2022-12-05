@@ -17,7 +17,7 @@ namespace eLibrary
         public string BookName { get; set; }
         public string CategoryName { get; set; }
         public System.DateTime IssueDate { get; set; }
-        public System.DateTime SubmissionDate { get; set; }
+        public System.DateTime? SubmissionDate { get; set; }
         public Nullable<System.DateTime> SubmittedOn { get; set; }
     }
 }

@@ -1,34 +1,30 @@
-﻿@{
+﻿import swal from 'sweetlaert';
+@{
     ViewBag.Title = "Create";
     var money = ViewBag.Message;
 }
-<style>
-    body {
-        background-image: url('https://cdn.pixabay.com/photo/2020/05/16/16/43/book-5178205__480.jpg');
-        background-repeat: no-repeat;
-        background-size: 1400px 700px;
-    }
-</style>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <style>
+        body {
+            background-image: url('https://cdn.pixabay.com/photo/2020/05/16/16/43/book-5178205__480.jpg');
+            background-size: 1400px 700px;
+        }
+    </style>
+</head>
 <br>
 <br>
 <br><br>
-<script>
-    function successfullySubscribed() {
-        alert('successfullySubscribed');
-        return true;
-    }
-</script>
+
 @if (@money > 0)
 {
-    <div class="table-bordered tables" style="background-color:cornsilk; padding:8px 8px 8px 8px; opacity: 0.9">
-        @using (Html.BeginForm("Create", "Subscription"))
-        {
-
+    <div class="table-bordered tables subscription">
+        <form asp-action="Create" asp-controller="Subscription" onsubmit="return validatePayment()" method="post">
             <h2>Payment Details</h2>
             <table class="table table-bordered table-striped" style="border: 4px solid double;">
                 <thead>
                     <tr>
-                        <th>Username</th>
+                        <th>Cardholder's Name</th>
 
                         <th>Email</th>
                     </tr>
@@ -48,11 +44,12 @@
                 <input type="radio" name="gender" value="female" required> Female<br>
             </div>
             <h4>Payment Details</h4>
-            <label>CardNumber</label><input type="tel" size="4" required><input type="tel" size="4" required><input type="tel" size="4" required>
+            <label>CardNumber</label><input type="number" id="card-1" required><input type="number" id="card-2" required><input type="number" id="card-3" required>
             <label>CVV</label>
             <select required>
                 <option>01 Jun</option>
-                <option>02 Dec</option></select> 
+                <option>02 Dec</option>
+            </select>
             <select>
                 <option>2023</option>
                 <option>2024</option>
@@ -61,12 +58,12 @@
             <label style="height:15px"><input type="hidden" name="money" value="@money">@money</label>
             <center>
                 <div style="margin-top: 10px">
-                    <input type="submit" name="PayNow" onsubmit="successfullySubscribed()" value="Submit" class="buttonAb" />
+                    <input type="submit" name="PayNow" value="Submit" class="buttonAb" />
                 </div>
             </center>
-        }
+        </form>
     </div>
-    
+
 }
 else
 {
@@ -74,7 +71,7 @@ else
     <div style="opacity: 0.9">
         @using (Html.BeginForm("Create", "Subscription"))
         {
-            <div class="table-bordered form-horizontal" style="background-color: cornsilk; width: 400px; border-radius:10px">
+            <div class="table-bordered form-horizontal monthform">
                 <table>
                     <thead>
                         <tr>
@@ -107,5 +104,24 @@ else
 }
 
 
-    
+
+<script>
+    function validatePayment()
+    {
+        let carddetail1 = document.getElementById("card-1").value;
+        let carddetail2 = document.getElementById("card-2").value;
+        let carddetail3 = document.getElementById("card-3").value;
+
+        if (carddetail1 < 1000 || carddetail1 > 9999 || carddetail2 < 1000 || carddetail2 > 9999 || carddetail3 < 1000 || carddetail3 > 9999) {
+
+            alert("Enter correct Card-details");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+</script>
+
 

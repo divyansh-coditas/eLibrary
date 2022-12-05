@@ -37,11 +37,12 @@
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Cateories", "Get", "Category")</li>
+                            <li>@Html.ActionLink("Categories", "Get", "Category")</li>
                             <li>@Html.ActionLink("Books", "GetBooks", "Book")</li>
                             <li>@Html.ActionLink("SubscribedUser", "GetAllSubscribedUser", "Subscription")</li>
                             <li>@Html.ActionLink("UsersHavingBooks", "GetAllUsersWithBooks", "Userbook")</li>
                             <li>@Html.ActionLink("BooksToApprove", "NotApprovedBooks", "Userbook")</li>
+                            <li>@Html.ActionLink("Users", "Get", "User")</li>
                             <li>@Html.ActionLink(User.Identity.Name, "DashBoard", "User")</li>
                             <li>@Html.ActionLink("Logout", "Logout", "User")</li>
                         }

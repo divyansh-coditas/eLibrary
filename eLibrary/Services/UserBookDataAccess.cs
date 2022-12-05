@@ -10,12 +10,15 @@ namespace eLibrary.Services
     {
         eLibraryEntities context = new eLibraryEntities();
         BookDataAccess bookdata = new BookDataAccess();
-        SubscrptionDataAccess subscribe = new SubscrptionDataAccess();
+
+        // this method will return all the users currently having books
         public IEnumerable<UserBookDetail> Get()
         {
             var result = context.UserBookDetails.ToList();
             return result;
         }
+
+        // this method is to create new users currently having books
         public int Create(UserBookDetail userBookDetail)
         {
             context.UserBookDetails.Add(userBookDetail);
@@ -39,9 +42,9 @@ namespace eLibrary.Services
         }
 
         //after book submission upadte the userbookdetails the table
-        public UserBookDetail Update(int id, int fine, int userid)
+        public UserBookDetail Update(int bookid, int fine, int userid)
         {
-            var result = context.UserBookDetails.ToList().Where(m => m.BookId == id && m.UserId == userid && (m.Is_Submitted == false || m.Is_Submitted == null)).FirstOrDefault();
+            var result = context.UserBookDetails.ToList().Where(m => m.BookId == bookid && m.UserId == userid && (m.Is_Submitted == false || m.Is_Submitted == null)).FirstOrDefault();
             result.SubmittedOn = DateTime.Now;
             result.Is_Submitted = true;
             result.Fine = fine;
@@ -72,12 +75,15 @@ namespace eLibrary.Services
         }
 
         // For Admin Use 
+        
+        // this method will return all the users currently having books
         public IEnumerable<sp_GetAllUsersBooks_Result> GetAllUsersHavingBooks()
         {
-            var result = context.sp_GetAllUsersBooks().ToList().Where(m => m.SubmittedOn == null);
+            var result = context.sp_GetAllUsersBooks().ToList().Where(m => m.SubmittedOn == null && m.SubmissionDate != null);
             return result;
         }
 
+        // this method will return all the books to approve
         public IEnumerable<sp_GetNotApprovedUserBooks_Result> GetNotApprovedUserBooks()
         {
             var result = context.sp_GetNotApprovedUserBooks().ToList();

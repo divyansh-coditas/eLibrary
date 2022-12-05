@@ -8,17 +8,12 @@
         background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
         background-size: 1000px 700px;
     }
-    th {
-        background-color: rosybrown;
-        color: white;
-        height: 50px;
-    }
 </style>
 <br>
 <br>
 @if (User.IsInRole("User"))
 {
-    <div class="table-bordered tables" style="padding:10px;">
+    <div class="table-bordered tables searchtbale">
 
         @using (@Html.BeginForm("GetBooks", "Category"))
         {
@@ -26,7 +21,7 @@
                 <tr>
                     <td>CategoryName:</td>
                     <td><input type="text" name="CategoryName"></td>
-                    <td><input type="submit" value="Search" class="btn buttonAb buttonAbc" style="margin-left: 10px;"/></td>
+                    <td><input type="submit" value="Search" class="btn buttonAb buttonAbc" style="margin-left: 10px;" /></td>
                 </tr>
             </table>
         }
@@ -35,11 +30,11 @@
 else
 {
     <p>
-        @Html.ActionLink("Create New", "Create",new { }, htmlAttributes: new { @class = "buttonAb"})
+        @Html.ActionLink("Create New", "Create", new { }, htmlAttributes: new { @class = "buttonAb" })
     </p>
 }
 <br>
-<table class="table table-bordered tables" style="background-color: mintcream" >
+<table class="table table-bordered tables" style="background-color: mintcream">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.CategoryName)
@@ -58,7 +53,7 @@ else
             {
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }, htmlAttributes: new { @class = "buttonAb" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId }, htmlAttributes: new { @class = "buttonAb" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId }, htmlAttributes: new { onclick = "return confirmation()", @class = "buttonAb" })
 
                 </td>
             }
@@ -73,3 +68,14 @@ else
 
 </table>
 
+<script>
+    function confirmation() {
+        const response = confirm('Are You Sure ?');
+        if (response) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>

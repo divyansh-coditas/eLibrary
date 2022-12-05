@@ -2,47 +2,86 @@
 
 @{
     ViewBag.Title = "NotApprovedBooks";
+    var isapproved = Convert.ToInt32(TempData["approval"]);
+    var isdeleted = Convert.ToInt32(TempData["rejected"]);
 }
-<br><br><br>
-<style>
-    body {
-        background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-</style>
+<br>
+<br>
+<br>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&w=1000&q=80');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    <script>
+        if (@isapproved == 1)
+        {
+            swal("Okay","Approved Successfully", "succees")
+        }
+    </script>
+</head>
 
-<table class="table table-bordered tables">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IssueDate)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@if (Model.Any())
+{
+    <table class="table table-bordered tables">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookName)
-            </td>
-            <td>
-                @item.IssueDate.Value.ToShortDateString()
-            </td>
-            <td>
-                @Html.ActionLink("Approve", "Approve", new { detailid = item.DetailId }, htmlAttributes:new { @class = "buttonAb buttonAbc"})
-                @Html.ActionLink("Delete", "DeleteUserBook", new { detailid = item.DetailId }, htmlAttributes: new { @class = "buttonAb buttonAbc" })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IssueDate)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookName)
+                </td>
+                <td>
+                    @item.IssueDate.Value.ToShortDateString()
+                </td>
+                <td>
+                    @Html.ActionLink("Approve", "Approve", new {detailid = item.DetailId }, htmlAttributes: new { onclick = "return confirmation()" ,@class = "buttonAb buttonAbc", style = "background-color: green"})    
+                    @Html.ActionLink("Reject", "DeleteUserBook", new { detailid = item.DetailId }, htmlAttributes: new { onclick = "return confirmation()" ,@class = "buttonAb buttonAbc", style = "background-color: red" })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <center>
+        <div class="jumbotron" style="height:200px; width: 500px; margin-top: 40px; background-color: lightyellow; opacity: 70%">
+            <h3>No Books to Approve</h3>
+        </div>
+    </center>
+}
+
+<script>
+    function confirmation()
+    {
+        const response = confirm('Are You Sure ?');
+        if (response) {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    } 
+</script>

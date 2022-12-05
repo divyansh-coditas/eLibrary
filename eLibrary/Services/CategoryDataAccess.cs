@@ -10,12 +10,14 @@ namespace eLibrary.Services
     {
         eLibraryEntities context = new eLibraryEntities();
 
+        // this method will return all the categories of the books
         public IEnumerable<Bookcategory> Get()
         {
             var result = context.Bookcategories.ToList();
             return result;
         }
 
+        // this method is for creation of the books
         public Bookcategory create(Bookcategory bookcategory) 
         {
             var res = context.Bookcategories.Add(bookcategory);
@@ -23,6 +25,7 @@ namespace eLibrary.Services
             return res;
         }
 
+        // this method is for updating already existing book category
         public Bookcategory Update(int id, Bookcategory bookcategory)
         {
             var category = context.Bookcategories.Find(id);
@@ -32,14 +35,10 @@ namespace eLibrary.Services
             
         }
 
+        // this method is to delete the book category
         public bool Delete(int id) 
-        {
-            
+        {          
                 var category = context.Bookcategories.Find(id);
-                if (category == null)
-                {
-                    throw new Exception("Record to be deleted is not found");
-                }
                 context.Bookcategories.Remove(category);
                 context.SaveChanges();
                 return true;           

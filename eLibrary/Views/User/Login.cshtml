@@ -1,5 +1,8 @@
 ﻿@{
     ViewBag.Title = "Login";
+    var message = ViewBag.Message;
+    var sessionout = Convert.ToInt32(TempData["failed"]);
+    var login = Convert.ToInt32(TempData["login"]);
 }
 <head>
     <style>
@@ -7,12 +10,25 @@
             background-image: url('https://wallpaperaccess.com/full/124378.jpg');
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script>
+        if (@sessionout == 1)
+        {
+            swal("Failed", "Session Time Out", "error");
+        }
+        if (@login == 1)
+        {
+            swal("Successfully", "Registration done","success");
+        }
+    </script>
 </head>
 <div class="login" style="border-radius:20px">
 <br>
 <center>
     @using (Html.BeginForm("Login", "User"))
     {
+        <h2>Login</h2>
+        <label class="alert-danger">@message</label>
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
@@ -30,7 +46,7 @@
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Login" class="buttonAb buttonAbc" style="margin-left:-25px" />
-                    @Html.ActionLink("Register", "Create","User", htmlAttributes: new { @class = "buttonAb buttonAbc" })
+                    @Html.ActionLink("Register", "Create", "User", htmlAttributes: new { @class = "buttonAb buttonAbc" })
                 </div>
             </div>
         </div>

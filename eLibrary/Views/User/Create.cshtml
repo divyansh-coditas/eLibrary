@@ -2,87 +2,50 @@
 
 @{
     ViewBag.Title = "Create";
+    var message = ViewBag.Message;
 }
 
-@*<head>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <style>
         body {
             background-image: url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGJvb2t8ZW58MHx8MHx8&w=1000&q=80');
             background-size: 1400px 700px;
         }
     </style>
-</head>*@
+
+</head>
 
 
-@*@using (@Html.BeginForm(null, null, FormMethod.Post, new { id = "RegistrationForm" }))
-{
-    <br><br><br>
-    <h2 style="margin-left:15px;">Register</h2>
-    @Html.AntiForgeryToken()
-
-    <table style=" border-collapse:separate; border-spacing: 10px 15px">
-        <tr>
-            <td><label>Username:</label></td>
-            <td>@Html.TextBoxFor(m => m.UserName, new { @Value = @Model.UserName})</td>
-            <td>@Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger"})</td>
-        </tr>
-        <tr>
-            <td><label>Password:</label></td>
-            <td>@Html.PasswordFor(m => m.UserPassword, new { @Value = @Model.UserPassword})</td>
-        </tr>
-        <tr>
-            <td><label>ContactNo:</label></td>
-            <td>@Html.TextBoxFor(m => m.ContactNo, new { @Value = @Model.ContactNo})</td>
-        </tr>
-        <tr>
-            <td><label>Address:</label></td>
-            <td>@Html.TextBoxFor(m => m.UserAddress, new { @Value = @Model.UserAddress})</td>
-        </tr>
-        <tr>
-            <td><label>Ocuupation:</label></td>
-            <td>@Html.TextBoxFor(m => m.Occupation, new { @Value = @Model.Occupation})</td>
-        </tr>
-        <tr>
-            <td><label>Age:</label></td>
-            <td>@Html.TextBoxFor(m => m.Age, new { @Value = @Model.Age})</td>
-        </tr>
-        <tr>
-
-        </tr>
-    </table>
-<input type="submit" value="Register" class="buttonAb" style="margin-left:110px;">
-@Html.ActionLink("Login", "Login", "User", htmlAttributes: new { @class = "buttonAb" })
-}*@
-<div id="Errormsg"></div>
 <form  asp-action="Create" asp-controller="User" name="registrationform" onsubmit="return validateform()" method="post">
     <br><br><br>
     <h2 style="margin-left:15px;">Register</h2>
-
+    <label class="alert-danger">@message</label>
     <table style=" border-collapse:separate; border-spacing: 10px 15px">
         <tr>
             <td><label for="UserName">Username:</label></td>
-            <td><input type="text" id="UserName" name="UserName"></td>
-            @*<td>@Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })</td>*@
+            <td><input type="text" id="UserName" name="UserName" required></td>
+           
         </tr>
         <tr>
-            <td><label>Password:</label></td>
-            <td><input type="text" id="password"></td>
+            <td><label for="UserPassword">Password:</label></td>
+            <td><input type="password" id="password" name="UserPassword" required minlength ="3"></td>
         </tr>
         <tr>
-            <td><label>ContactNo:</label></td>
-            <td><input type="tel" id="phone"></td>
+            <td><label for="ContactNo">ContactNo:</label></td>
+            <td><input type="tel" id="phone" name="ContactNo" required minlength="10" maxlength="10"></td>
         </tr>
         <tr>
-            <td><label>Address:</label></td>
-            <td><input type="text" id="address"></td>
+            <td><label for="UserAddress">Address:</label></td>
+            <td><input type="text" id="address" name="UserAddress" required minlength="6"></td>
         </tr>
         <tr>
-            <td><label>Occupation:</label></td>
-            <td><input type="text" id="occupation"></td>
+            <td><label for="Occupation">Occupation:</label></td>
+            <td><input type="text" id="occupation" name="Occupation" required></td>
         </tr>
         <tr>
-            <td><label>Age:</label></td>
-            <td><input type="text" id="age"></td>
+            <td><label for="Age">Age:</label></td>
+            <td><input type="number" id="age" name="Age" required min="4"></td>
         </tr>
         <tr>
         </tr>
@@ -91,22 +54,39 @@
 </form>
 
 <script>
+   
     function validateform() {
-        let name = document[registrationform].getElementById("username").value;
-        let password = document.registrationform.getElementById("password").value;
-        let contactno = document.registrationform.getElementById("phone").value;
-        let address = document.registrationform.getElementById("address").value;
-        let ocupation = document.registrationform.getElementById("occupation").value;
-        let age = document.resgistrationform.getElementById("age").value;
-
-        if (name.length < 3) {
-            document.getElementById("Errormsg").innerHTML = "Invalid";
+        let password = document.getElementById("password").value;
+        let contactno = document.getElementById("phone").value;
+        let address = document.getElementById("address").value;
+        let ocupation = document.getElementById("occupation").value;
+        let age = document.getElementById("age").value;
+      
+        if (password.length < 3)
+        {
+            alert("Passwrod is too short")
             return false;
         }
-        else
+        if (contactno.length != 10)
         {
-            return true;
+            alert("Enter correct contact no")
+            return false;
         }
+        if (address.length == "")
+        {
+            alert("Please enter correct address")
+            return false;
+        }
+        if (ocupation.length == "") {
+            alert("Please enter occupation")
+            return false;
+        }
+        if (age < 3 || age > 100)
+        {
+            alert("Please enter correct age")
+            return false;
+        }
+        return true
     }
 </script>
 @*@section Scripts {
