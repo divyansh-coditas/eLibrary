@@ -250,8 +250,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User\Get.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\GetAllUser.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
@@ -260,8 +260,8 @@
     <Content Include="Views\Book\GetBooks.cshtml" />
     <Content Include="Views\Book\GetBookByName.cshtml" />
     <Content Include="Views\Subscription\Get.cshtml" />
-    <Content Include="Views\Subscription\Create.cshtml" />
-    <Content Include="Views\Subscription\View.cshtml" />
+    <Content Include="Views\Subscription\CreateSubscriber.cshtml" />
+    <Content Include="Views\Subscription\Message.cshtml" />
     <Content Include="Views\Userbook\GetAccess.cshtml" />
     <Content Include="Views\Userbook\GetById.cshtml" />
     <Content Include="Views\Userbook\Fine.cshtml" />

@@ -10,24 +10,23 @@
     }
 </style>
 <br>
-<br>
-@if (User.IsInRole("User"))
-{
-    <div class="table-bordered tables searchtbale">
 
-        @using (@Html.BeginForm("GetBooks", "Category"))
-        {
-            <table>
-                <tr>
-                    <td>CategoryName:</td>
-                    <td><input type="text" name="CategoryName"></td>
-                    <td><input type="submit" value="Search" class="btn buttonAb buttonAbc" style="margin-left: 10px;" /></td>
-                </tr>
-            </table>
-        }
-    </div>
-}
-else
+
+<div class="table-bordered tables searchtbale">
+
+    @using (@Html.BeginForm("GetBooks", "Category"))
+    {
+        <table>
+            <tr>
+                <td>CategoryName:</td>
+                <td><input type="text" name="CategoryName"></td>
+                <td><input type="submit" value="Search" class="btn buttonAb buttonAbc" style="margin-left: 10px;" /></td>
+            </tr>
+        </table>
+    }
+</div>
+<br>
+@if (User.IsInRole("Admin"))
 {
     <p>
         @Html.ActionLink("Create New", "Create", new { }, htmlAttributes: new { @class = "buttonAb" })

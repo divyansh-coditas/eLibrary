@@ -18,30 +18,26 @@ namespace eLibrary.Services
         }
 
         // this method is for creation of the books
-        public Bookcategory create(Bookcategory bookcategory) 
+        public void create(Bookcategory bookcategory) 
         {
             var res = context.Bookcategories.Add(bookcategory);
             context.SaveChanges();
-            return res;
         }
 
         // this method is for updating already existing book category
-        public Bookcategory Update(int id, Bookcategory bookcategory)
+        public void Update(int id, Bookcategory bookcategory)
         {
             var category = context.Bookcategories.Find(id);
             category.CategoryName = bookcategory.CategoryName;
-            context.SaveChanges();
-            return category;
-            
+            context.SaveChanges();          
         }
 
         // this method is to delete the book category
-        public bool Delete(int id) 
+        public void Delete(int id) 
         {          
                 var category = context.Bookcategories.Find(id);
                 context.Bookcategories.Remove(category);
-                context.SaveChanges();
-                return true;           
+                context.SaveChanges();          
         }
 
     }

@@ -10,8 +10,14 @@ namespace eLibrary.Controllers
     [Authorize]
     public class SubscriptionController : Controller
     {
-        SubscrptionDataAccess data = new SubscrptionDataAccess();
-        eLibraryEntities context = new eLibraryEntities();
+        SubscrptionDataAccess data;
+        eLibraryEntities context;
+
+        public SubscriptionController() 
+        {
+            data = new SubscrptionDataAccess();
+            context = new eLibraryEntities();
+        }
 
         // this method will return all the user with subscription
         
@@ -22,10 +28,10 @@ namespace eLibrary.Controllers
             return View(users);
         }
 
-        //this is method is for users  for subscription
+        // this is method is for users  for subscription
 
         [Authorize (Roles = "User")]
-        public ActionResult Create() 
+        public ActionResult CreateSubscriber() 
         {
             if (Session["Id"] != null)
             {
@@ -34,7 +40,7 @@ namespace eLibrary.Controllers
                 if (userexist != null)
                 {
                     ViewBag.Message = userexist.EndDate.ToShortDateString();
-                    return View("View");
+                    return View("Message");
                 }
                 // else the user be directed to subscription page
                 return View();
@@ -47,7 +53,7 @@ namespace eLibrary.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string months, string money) 
+        public ActionResult CreateSubscriber(string months, string money) 
         {
             if (Session["Id"] != null)
             {

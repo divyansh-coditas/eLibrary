@@ -10,8 +10,14 @@ namespace eLibrary.Controllers
     [Authorize]
     public class BookController : Controller
     {
-        BookDataAccess bookdata = new BookDataAccess();
-        CategoryDataAccess categorydata = new CategoryDataAccess();
+        BookDataAccess bookdata;
+        CategoryDataAccess categorydata;
+
+        public BookController() 
+        {
+            bookdata = new BookDataAccess();
+            categorydata = new CategoryDataAccess();
+        }
         
         // this action method will return all the books to the user ands also implemented pagination
         public ActionResult GetBooks(string next, string previous)

@@ -10,23 +10,28 @@ namespace eLibrary.Controllers
 {
     public class UserController : Controller
     {
-        UserDataAccess userdata = new UserDataAccess();
+        UserDataAccess userdata;
+
+        public UserController() 
+        {
+            userdata = new UserDataAccess();
+        }
 
         // this action method will return all the user of the application
-        public ActionResult Get()
+        public ActionResult GetAllUser ()
         {
             var data = userdata.Get();
             return View(data);
         }
 
-        public ActionResult Create()
+        public ActionResult Register()
         { 
             return View();
         }
 
         // this action method is to register new user
         [HttpPost]
-        public ActionResult Create(User user)
+        public ActionResult Register(User user)
         {
                 user.RoleID = 2;
                 // this will check whether the user already exist or not
@@ -49,11 +54,9 @@ namespace eLibrary.Controllers
 
         [HttpPost]
         public ActionResult Login(string name, string password)
-        {
-            using (var context = new eLibraryEntities())
-            {
+        {      
                 // this will check the username and password matches or not
-                bool isValid = context.Users.Any(u => u.UserName == name && u.UserPassword == password);
+                bool isValid = userdata.Get().Any(u => u.UserName == name && u.UserPassword == password);
                 if (isValid)
                 {
                     var data = (from us in userdata.Get()
@@ -66,7 +69,7 @@ namespace eLibrary.Controllers
                 }
                 ViewBag.Message = "Invalid Username or Password"; ;    
                 return View();
-            }
+            
         }
 
         [Authorize]

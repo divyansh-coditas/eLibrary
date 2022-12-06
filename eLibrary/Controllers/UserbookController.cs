@@ -10,10 +10,18 @@ namespace eLibrary.Controllers
     [Authorize]
     public class UserbookController : Controller
     {
-        BookDataAccess bookdata = new BookDataAccess();
-        UserBookDataAccess userbooks = new UserBookDataAccess();
-        UserDataAccess users = new UserDataAccess();
-        SubscrptionDataAccess subscribeduser = new SubscrptionDataAccess();
+        BookDataAccess bookdata;
+        UserBookDataAccess userbooks;
+        UserDataAccess users;
+        SubscrptionDataAccess subscribeduser;
+
+        public UserbookController() 
+        {
+            bookdata = new BookDataAccess();
+            userbooks = new UserBookDataAccess();
+            users = new UserDataAccess();
+            subscribeduser = new SubscrptionDataAccess();
+        }
         public ActionResult GetAccess(int id)
         {
             if (Session["Id"] != null)
@@ -27,13 +35,13 @@ namespace eLibrary.Controllers
                 {
                     // if the user already have access of that book 
                     // then user will be Redirected to this View 
-                    ViewBag.Message = "Sorry!!!, You alredy have access of this book";
+                    ViewBag.Message = "Sorry!!! You already have access of this book";
                     return View();
                 }
                 if (bookdetail.Rating == "Adult" && userdetail.Age <= 18)
                 {
                     //user age is less than 18 and they are trying to access Adult books
-                    ViewBag.Message = "Sorry!!!, You are not authorised since your age is less than 18";
+                    ViewBag.Message = "Sorry!!! You are not authorised since your age is less than 18";
                     return View();
 
                 }

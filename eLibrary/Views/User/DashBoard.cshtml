@@ -51,9 +51,12 @@
                     </tr>
                 </thead>
             </table>
-            @Html.ActionLink("MySubscription", "Create", "Subscription", new { }, htmlAttributes: new { @class = "buttonAb buttonAbc" })
+        @if (User.IsInRole("User"))
+        {
+            @Html.ActionLink("MySubscription", "Create", "Subscription", new { }, htmlAttributes: new { @class = "buttonAb buttonAbc" }) 
 
-            @Html.ActionLink("MyBooks", "GetById", "UserBook", new { }, htmlAttributes: new { @class = "buttonAb buttonAbc" })
+            @Html.ActionLink("MyBooks", "GetById", "UserBook", new { }, htmlAttributes: new { @class = "buttonAb buttonAbc", style = "margin-left: 20px"})
+        }
         </center><br>
         <div>
             

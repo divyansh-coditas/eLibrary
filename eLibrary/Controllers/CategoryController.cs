@@ -10,8 +10,13 @@ namespace eLibrary.Controllers
     [Authorize]
     public class CategoryController : Controller
     {
-        CategoryDataAccess catdata = new CategoryDataAccess();
-        BookDataAccess bookdata = new BookDataAccess();
+        CategoryDataAccess catdata;
+        BookDataAccess bookdata;
+        public CategoryController() 
+        {
+            catdata = new CategoryDataAccess();
+            bookdata = new BookDataAccess();
+        }
 
         // this action method will return all the categories to the user
         public ActionResult Get() 
@@ -29,15 +34,13 @@ namespace eLibrary.Controllers
         }
 
         [HttpPost]
-
         public ActionResult Create(Bookcategory bookcategory) 
         {
-            var result = catdata.create(bookcategory);
+            catdata.create(bookcategory);
             return RedirectToAction("Get","Category");
         }
 
         // this action method for editing the details of the existing book 
-
         [Authorize(Roles = "Admin")]
         public ActionResult Edit() 
         {
@@ -48,7 +51,7 @@ namespace eLibrary.Controllers
 
         public ActionResult Edit(int id, Bookcategory bookcategory) 
         { 
-            var result = catdata.Update(id, bookcategory);
+             catdata.Update(id, bookcategory);
             return RedirectToAction("Get");
         }
 
@@ -58,7 +61,7 @@ namespace eLibrary.Controllers
         {
             try
             {
-                var result = catdata.Delete(id);
+                 catdata.Delete(id);
                 return RedirectToAction("Get");
             }
             catch (Exception) 

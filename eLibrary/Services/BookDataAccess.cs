@@ -34,25 +34,23 @@ namespace eLibrary.Services
         }
 
         // this method is to update the book details
-        public BookDetail Update(int id) 
+        public void Update(int id) 
         {
             var book = context.BookDetails.Find(id);
             book.Quantity -= 1;
             context.SaveChanges();
-            return book;
         }
 
         // this method is to incearse the quanitiy of the books when user will submit it
-        public BookDetail Submit(int id) 
+        public void Submit(int id) 
         {
             var book = context.BookDetails.Find(id);
             book.Quantity += 1;
             context.SaveChanges();
-            return book;
         }
 
         // this method is edit the details of the book 
-        public BookDetail Edit(int id, BookDetail bookdetail) 
+        public void Edit(int id, BookDetail bookdetail) 
         {
             var book = context.BookDetails.Find(id);
             book.BookName = bookdetail.BookName;
@@ -62,7 +60,7 @@ namespace eLibrary.Services
             book.Quantity = bookdetail.Quantity;
 
             context.SaveChanges();
-            return book;
+           
         }
 
         // this method is for creating new books
