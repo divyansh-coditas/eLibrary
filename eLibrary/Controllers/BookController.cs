@@ -13,10 +13,10 @@ namespace eLibrary.Controllers
         BookDataAccess bookdata;
         CategoryDataAccess categorydata;
 
-        public BookController() 
+        public BookController(BookDataAccess bookdata, CategoryDataAccess categorydata) 
         {
-            bookdata = new BookDataAccess();
-            categorydata = new CategoryDataAccess();
+            this.bookdata = bookdata;
+            this.categorydata = categorydata;
         }
         
         // this action method will return all the books to the user ands also implemented pagination

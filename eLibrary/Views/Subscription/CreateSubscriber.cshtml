@@ -19,7 +19,7 @@
 @if (@money > 0)
 {
     <div class="table-bordered tables subscription">
-        <form asp-action="Create" asp-controller="Subscription" onsubmit="return validatePayment()" method="post">
+        <form asp-action="CreateSubscriber" asp-controller="Subscription" onsubmit="return validatePayment()" method="post">
             <h2>Payment Details</h2>
             <table class="table table-bordered table-striped" style="border: 4px solid double;">
                 <thead>
@@ -36,8 +36,8 @@
                     </tr>
                 </tbody>
             </table>
-            <h4>Date Of Birth</h4>
-            <input type="date" name="date" id="name"><br>
+            @*<h4>Date Of Birth</h4>
+            <input type="date" name="date" id="name"><br>*@
             <div>
                 <h4>Gender</h4>
                 <input type="radio" name="gender" value="male" required> Male<br>
@@ -69,7 +69,7 @@ else
 {
 <center>
     <div style="opacity: 0.9">
-        @using (Html.BeginForm("Create", "Subscription"))
+        @using (Html.BeginForm("CreateSubscriber", "Subscription"))
         {
             <div class="table-bordered form-horizontal monthform">
                 <table>

@@ -15,13 +15,14 @@ namespace eLibrary.Controllers
         UserDataAccess users;
         SubscrptionDataAccess subscribeduser;
 
-        public UserbookController() 
+        public UserbookController(BookDataAccess bookdata, UserBookDataAccess userbooks, UserDataAccess users, SubscrptionDataAccess subscribeduser) 
         {
-            bookdata = new BookDataAccess();
-            userbooks = new UserBookDataAccess();
-            users = new UserDataAccess();
-            subscribeduser = new SubscrptionDataAccess();
+            this.bookdata = bookdata;
+            this.userbooks = userbooks; 
+            this.users = users;
+            this.subscribeduser = subscribeduser;
         }
+ 
         public ActionResult GetAccess(int id)
         {
             if (Session["Id"] != null)

@@ -23,6 +23,9 @@ namespace eLibrary.Services
                          join bookcat in context.Bookcategories on book.CategoryId equals bookcat.CategoryId
                          where bookcat.CategoryName == name
                          select book;
+            //var result = context.BookDetails.Join(context.Bookcategories , m => m.CategoryId, n => n.CategoryId, (m,n) 
+            //             => new { m, n}).Where(x => x.n.CategoryName == name).Select(y => new { y.m }));
+
             return result;
         }
         

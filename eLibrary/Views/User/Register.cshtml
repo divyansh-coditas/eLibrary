@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td><label for="Age">Age:</label></td>
-            <td><input type="number" id="age" name="Age" required min="4"></td>
+            <td><input type="number" id="age" name="Age" required></td>
         </tr>
         <tr>
         </tr>
@@ -56,31 +56,8 @@
 <script>
    
     function validateform() {
-        let password = document.getElementById("password").value;
-        let contactno = document.getElementById("phone").value;
-        let address = document.getElementById("address").value;
-        let ocupation = document.getElementById("occupation").value;
         let age = document.getElementById("age").value;
       
-        if (password.length < 3)
-        {
-            alert("Passwrod is too short")
-            return false;
-        }
-        if (contactno.length != 10)
-        {
-            alert("Enter correct contact no")
-            return false;
-        }
-        if (address.length == "")
-        {
-            alert("Please enter correct address")
-            return false;
-        }
-        if (ocupation.length == "") {
-            alert("Please enter occupation")
-            return false;
-        }
         if (age < 3 || age > 100)
         {
             alert("Please enter correct age")

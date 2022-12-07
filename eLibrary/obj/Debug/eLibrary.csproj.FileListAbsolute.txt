@@ -81,3 +81,10 @@ C:\Project\eLibrary\eLibrary\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatf
 C:\Project\eLibrary\eLibrary\obj\Debug\eLibrary.csproj.CopyComplete
 C:\Project\eLibrary\eLibrary\obj\Debug\eLibrary.dll
 C:\Project\eLibrary\eLibrary\obj\Debug\eLibrary.pdb
+C:\Project\eLibrary\eLibrary\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Project\eLibrary\eLibrary\bin\Unity.Abstractions.dll
+C:\Project\eLibrary\eLibrary\bin\Unity.Container.dll
+C:\Project\eLibrary\eLibrary\bin\Unity.Mvc5.dll
+C:\Project\eLibrary\eLibrary\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Project\eLibrary\eLibrary\bin\Unity.Abstractions.pdb
+C:\Project\eLibrary\eLibrary\bin\Unity.Container.pdb

@@ -12,9 +12,9 @@ namespace eLibrary.Controllers
     {
         UserDataAccess userdata;
 
-        public UserController() 
+        public UserController(UserDataAccess userdata) 
         {
-            userdata = new UserDataAccess();
+            this.userdata = userdata;     
         }
 
         // this action method will return all the user of the application
@@ -84,6 +84,7 @@ namespace eLibrary.Controllers
             {
                 TempData["failed"] = 1;
                 return RedirectToAction("Login", "user");
+
             }
         }
         public ActionResult LogOut()

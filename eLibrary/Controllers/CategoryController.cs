@@ -12,11 +12,13 @@ namespace eLibrary.Controllers
     {
         CategoryDataAccess catdata;
         BookDataAccess bookdata;
-        public CategoryController() 
+        public CategoryController(CategoryDataAccess catdata, BookDataAccess bookdata)
         {
-            catdata = new CategoryDataAccess();
-            bookdata = new BookDataAccess();
+            this.catdata = catdata;
+            this.bookdata = bookdata;
         }
+
+
 
         // this action method will return all the categories to the user
         public ActionResult Get() 

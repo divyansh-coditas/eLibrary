@@ -11,12 +11,11 @@ namespace eLibrary.Controllers
     public class SubscriptionController : Controller
     {
         SubscrptionDataAccess data;
-        eLibraryEntities context;
+        //eLibraryEntities context;
 
-        public SubscriptionController() 
+        public SubscriptionController(SubscrptionDataAccess data) 
         {
-            data = new SubscrptionDataAccess();
-            context = new eLibraryEntities();
+            this.data = data;    
         }
 
         // this method will return all the user with subscription
